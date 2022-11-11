@@ -1,0 +1,86 @@
+@import url(./vendor/normalize.css);
+@import url(./vendor/InterWeb/inter.css);
+@import url(./blocks/page/page.css);
+
+@import url(./blocks/nopage/nopage.css);
+@import url(./blocks/nopage/__title/nopage__title.css);
+@import url(./blocks/nopage/__subtitle/nopage__subtitle.css);
+
+.main {
+  min-width: 320px;
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 70px;
+}
+
+.header__links {
+  display: flex;
+}
+
+.header__links_desktop {
+  flex-direction: row;
+  gap: 16px;
+}
+
+.header__links_mobile {
+  flex-direction: column;
+  gap: 24px;
+}
+
+.header__link {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.header__menu_mobile {
+  display: none;
+}
+
+.header__account {
+  display: flex;
+  flex-direction: row;
+  gap: 13px;
+  align-items: center;
+}
+
+.header__account-link {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.header__account-body {
+  width: 30px;
+  height: 30px;
+  background: #313131;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__burger {
+  background: url(./images/header__burger.svg);
+  background-size: 44px 44px;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 44px;
+  height: 44px;
+}
+
+.header__burger_active {
+  background-image: url(./images/header__burger_active.svg);
+}
