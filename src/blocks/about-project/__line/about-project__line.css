@@ -1,0 +1,12 @@
+.about-project__line {
+  background: #dadada;
+  width: 100%;
+  height: 1px;
+  margin-top: 23px;
+}
+
+@media screen and (max-width: 600px) {
+  .about-project__line {
+    margin-top: 28px;
+  }
+}

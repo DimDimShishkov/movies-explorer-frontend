@@ -1,0 +1,20 @@
+.about-project__containers {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+  margin-top: 70px;
+}
+
+@media screen and (max-width: 900px) {
+  .about-project__containers {
+    gap: 30px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .about-project__containers {
+    flex-direction: column;
+    margin-top: 60px;
+    gap: 56px;
+  }
+}
