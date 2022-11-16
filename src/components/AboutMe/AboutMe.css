@@ -1,0 +1,11 @@
+@import url(../../blocks/about-me/about-me.css);
+@import url(../../blocks/about-me/__section/about-me__section.css);
+@import url(../../blocks/about-me/__title/about-me__title.css);
+@import url(../../blocks/about-me/__line/about-me__line.css);
+@import url(../../blocks/about-me/__items/about-me__items.css);
+@import url(../../blocks/about-me/__avatar/about-me__avatar.css);
+@import url(../../blocks/about-me/__info/about-me__info.css);
+@import url(../../blocks/about-me/__subtitle/about-me__subtitle.css);
+@import url(../../blocks/about-me/__profession/about-me__profession.css);
+@import url(../../blocks/about-me/__description/about-me__description.css);
+@import url(../../blocks/about-me/__link/about-me__link.css);

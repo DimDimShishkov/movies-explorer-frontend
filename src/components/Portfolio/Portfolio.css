@@ -1,0 +1,7 @@
+@import url(../../blocks/portfolio/portfolio.css);
+@import url(../../blocks/portfolio/__section/portfolio__section.css);
+@import url(../../blocks/portfolio/__heading/portfolio__heading.css);
+@import url(../../blocks/portfolio/__container/portfolio__container.css);
+@import url(../../blocks/portfolio/__subheading/portfolio__subheading.css);
+@import url(../../blocks/portfolio/__arrow/portfolio__arrow.css);
+@import url(../../blocks/portfolio/__line/portfolio__line.css);

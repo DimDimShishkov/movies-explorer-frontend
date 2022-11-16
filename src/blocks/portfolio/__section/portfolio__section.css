@@ -1,0 +1,29 @@
+.portfolio__section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 100px 0;
+}
+
+@media screen and (max-width: 1200px) {
+  .portfolio__section {
+    padding: 97px 0;
+    margin: 0 50px;
+    width: auto;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .portfolio__section {
+    padding: 90px 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .portfolio__section {
+    margin: 0 14px;
+    padding: 70px 0;
+  }
+}

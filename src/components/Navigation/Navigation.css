@@ -1,6 +1,5 @@
-
-.navigation {
-  display: flex;
+.navigation__menu {
+  display: none;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
@@ -14,8 +13,54 @@
   transition: all 0.3s ease;
 }
 
-.navigation_active {
+.navigation__menu_active {
   right: 0;
+  display: flex;
+}
+
+.navigation_start-page {
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+  .navigation_start-page {
+    gap: 14px;
+  }
+}
+
+.navigation__register {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+  .navigation__register {
+    font-size: 10px;
+  }
+}
+
+.navigation__auth {
+  background: #3ddc84;
+  border-radius: 3px;
+  padding: 8px 20px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #000000;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+  .navigation__auth {
+    font-size: 10px;
+    padding: 5px 12px;
+  }
 }
 
 .navigation__links {
@@ -63,4 +108,80 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+
+.header__links {
+  flex-direction: row;
+  gap: 16px;
+}
+
+.navigation__links {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.header__desktop {
+  display: flex;
+}
+
+@media screen and (max-width: 900px) {
+  .header__desktop {
+    display: none;
+  }
+}
+
+.header__link {
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  text-decoration: none;
+  color: #ffffff;
+}
+
+.header__account {
+  flex-direction: row;
+  gap: 13px;
+  align-items: center;
+}
+
+.header__account-link {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.header__account-body {
+  width: 30px;
+  height: 30px;
+  background: #313131;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__burger {
+  display: none;
+  background: url(../../images/header__burger.png) center no-repeat;
+  background-size: 44px 44px;
+  width: 44px;
+  height: 44px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 3;
+}
+
+@media screen and (max-width: 900px) {
+  .header__burger {
+    display: block;
+  }
+}
+
+.header__burger_active {
+  background-image: url(../../images/header__burger_active.png);
+  background-size: 32px 32px;
 }

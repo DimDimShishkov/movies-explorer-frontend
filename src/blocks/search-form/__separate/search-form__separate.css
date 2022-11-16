@@ -1,0 +1,11 @@
+.search-form__separate {
+  background: #cbcbcb;
+  width: 1px;
+  margin: 0 29px 0 20px;
+}
+
+@media screen and (max-width: 900px) {
+  .search-form__separate {
+    margin: 0 19px 0 20px;
+  }
+}

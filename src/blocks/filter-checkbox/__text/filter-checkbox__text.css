@@ -1,0 +1,13 @@
+.filter-checkbox__text {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  margin: 0;
+  color: #ffffff;
+}
+
+@media screen and (max-width: 600px) {
+  .filter-checkbox__text {
+    font-size: 11px;
+  }
+}

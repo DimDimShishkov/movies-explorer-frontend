@@ -1,0 +1,15 @@
+.portfolio__arrow {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 60px;
+  margin: 0;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+}
+
+@media screen and (max-width: 600px) {
+  .portfolio__arrow {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}

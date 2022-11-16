@@ -1,0 +1,19 @@
+.promo__texts {
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+  max-width: 640px;
+}
+
+@media screen and (max-width: 900px) {
+  .promo__texts {
+    align-items: center;
+    gap: 22px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .promo__texts {
+    gap: 24px;
+  }
+}

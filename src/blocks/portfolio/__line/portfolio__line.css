@@ -1,0 +1,13 @@
+.portfolio__line {
+  background: #424242;
+  width: 100%;
+  height: 1px;
+  margin: 20px 0;
+}
+
+@media screen and (max-width: 600px) {
+  .portfolio__line {
+    background: #e6e6e6;
+    margin-top: 28px;
+  }
+}

@@ -1,0 +1,9 @@
+@import url(../../blocks/promo/promo.css);
+@import url(../../blocks/promo/__section/promo__section.css);
+@import url(../../blocks/promo/__content/promo__content.css);
+@import url(../../blocks/promo/__texts/promo__texts.css);
+@import url(../../blocks/promo/__title/promo__title.css);
+@import url(../../blocks/promo/__subtitle/promo__subtitle.css);
+@import url(../../blocks/promo/__logo/promo__logo.css);
+@import url(../../blocks/promo/__container/promo__container.css);
+@import url(../../blocks/promo/__link/promo__link.css);

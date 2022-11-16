@@ -1,0 +1,12 @@
+.promo__logo {
+  width: 310px;
+  height: 304px;
+  object-fit: cover;
+}
+
+@media screen and (max-width: 600px) {
+  .promo__logo {
+    width: 210px;
+    height: 206px;
+  }
+}

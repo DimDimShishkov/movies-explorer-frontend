@@ -1,0 +1,15 @@
+.search-form__form {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .search-form__form {
+    background: #2f2f2f;
+    border-radius: 4px;
+    padding: 13px 16px;
+    width: auto;
+  }
+}

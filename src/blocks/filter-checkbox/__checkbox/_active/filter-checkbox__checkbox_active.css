@@ -1,0 +1,6 @@
+.filter-checkbox__checkbox_active {
+  background: #118c4e;
+}
+.filter-checkbox__checkbox_active::after {
+  left: 18px;
+}

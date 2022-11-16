@@ -1,0 +1,10 @@
+.search-form__button {
+  background: url(../../../images/search-form__logo.png) center no-repeat;
+  background-size: 34px 34px;
+  width: 37px;
+  height: 34px;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  box-sizing: border-box;
+}
