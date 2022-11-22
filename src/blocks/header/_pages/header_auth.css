@@ -1,0 +1,14 @@
+.header_auth {
+  position: relative;
+  width: 100%;
+  max-width: 396px;
+  padding: 70px 0 40px;
+}
+
+@media screen and (max-width: 600px) {
+  .header_auth {
+    width: auto;
+    padding: 56px 0 50px;
+    justify-content: center;
+  }
+}

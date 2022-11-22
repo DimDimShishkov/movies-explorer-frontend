@@ -11,10 +11,10 @@ export default function Footer() {
       <div className="footer__content">
         <p className="footer__item">© 2020</p>
         <div className="footer__links">
-          <a href="https://practicum.yandex.ru/" className="footer__item">
+          <a href="https://practicum.yandex.ru/" className="footer__link">
             Яндекс.Практикум
           </a>
-          <a href="https://github.com/" className="footer__item">
+          <a href="https://github.com/DimDimShishkov" className="footer__link">
             Github
           </a>
         </div>

@@ -70,7 +70,8 @@ class Api {
 }
 
 export const api = new Api({
-  url: "https://api.movies-explorer-ddsh.nomoredomains.icu",
+  // url: "https://api.movies-explorer-ddsh.nomoredomains.icu",
+  url: "https://localhost",
   headers: {
     "Content-Type": "application/json",
   },

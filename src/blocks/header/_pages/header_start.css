@@ -1,0 +1,24 @@
+.header_start {
+  width: auto;
+  align-items: center;
+  justify-content: space-between;
+  position: fixed;
+  max-width: 1140px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  padding: 18px 0;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 1200px) {
+  .header_start {
+    padding: 18px 30px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .header_start {
+    padding: 18px 14px;
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import logo from "../../images/header__logo.svg";
 import Navigation from "../Navigation/Navigation";
 import "./Header.css";

@@ -17,13 +17,13 @@
 
 @media screen and (max-width: 900px) {
   .about-project {
-    padding: 90px 0;
+    padding: 92px 0;
   }
 }
 
 @media screen and (max-width: 600px) {
   .about-project {
     margin: 0 18px;
-    padding: 70px 0;
+    padding: 72px 0;
   }
 }

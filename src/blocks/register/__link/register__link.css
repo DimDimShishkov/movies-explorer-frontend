@@ -1,0 +1,16 @@
+.register__link {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 0;
+  text-align: center;
+  text-decoration: none;
+  color: #4285f4;
+}
+
+@media screen and (max-width: 600px) {
+  .register__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

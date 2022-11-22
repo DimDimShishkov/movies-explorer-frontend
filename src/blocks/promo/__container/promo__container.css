@@ -1,9 +1,14 @@
 .promo__container {
   margin-top: 84px;
-  padding: 10px 20px;
+  padding: 5px 19px 9px;
   border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 3px;
   max-width: fit-content;
+  transition: all .3s ease;
+}
+
+.promo__container:hover {
+  opacity: 0.8;
 }
 
 @media screen and (max-width: 900px) {

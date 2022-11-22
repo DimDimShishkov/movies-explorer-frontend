@@ -6,3 +6,10 @@
   letter-spacing: -0.04em;
   color: #ffffff;
 }
+
+@media screen and (max-width: 600px) {
+  .about-me__title {
+    font-size: 18px;
+    line-height: 22px;
+  }
+}

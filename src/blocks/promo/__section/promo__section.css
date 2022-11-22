@@ -17,6 +17,7 @@
 @media screen and (max-width: 900px) {
   .promo__section {
     padding: 214px 0 76px;
+    align-items: center;
   }
 }
 

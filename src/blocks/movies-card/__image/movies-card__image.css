@@ -1,0 +1,23 @@
+.movies-card__image {
+  height: 151px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: all 0.3s ease;
+}
+
+.movies-card__image:hover {
+  transform: scale(1.1);
+}
+
+@media screen and (max-width: 900px) {
+  .movies-card__image {
+    height: 190px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .movies-card__image {
+    height: 168px;
+  }
+}
