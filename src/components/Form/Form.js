@@ -121,7 +121,9 @@ export default function Form({
         </label>
       </fieldset>
       <div className="form__submit-container">
-        <span className="form__submit-error">{errorMessage}</span>
+        {errorMessage && (
+          <span className="form__submit-error">{errorMessage}</span>
+        )}
         <button
           type="submit"
           className={`form__submit-button ${

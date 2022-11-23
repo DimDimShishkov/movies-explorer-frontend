@@ -1,0 +1,9 @@
+.navigation__account-body {
+  width: 30px;
+  height: 30px;
+  background: #313131;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

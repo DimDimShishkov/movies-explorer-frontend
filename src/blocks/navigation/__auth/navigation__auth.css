@@ -1,0 +1,17 @@
+.navigation__auth {
+  background: #3ddc84;
+  border-radius: 3px;
+  padding: 8px 20px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #000000;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+  .navigation__auth {
+    font-size: 10px;
+    padding: 5px 12px;
+  }
+}

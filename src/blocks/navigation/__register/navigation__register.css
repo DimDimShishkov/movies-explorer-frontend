@@ -1,0 +1,13 @@
+.navigation__register {
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 16px;
+  color: #ffffff;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+  .navigation__register {
+    font-size: 10px;
+  }
+}

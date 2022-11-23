@@ -8,3 +8,9 @@
   align-items: center;
   min-height: 100vh;
 }
+
+@media screen and (max-width: 600px) {
+  .profile__section {
+    padding: 70px 0;
+  }
+}

@@ -69,7 +69,7 @@ class Api {
   }
 }
 
-export const api = new Api({
+export const MoviesApi = new Api({
   // url: "https://api.movies-explorer-ddsh.nomoredomains.icu",
   url: "https://localhost",
   headers: {

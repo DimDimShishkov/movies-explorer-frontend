@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import account from "../../images/header__account.svg";
+import account from "../../images/account.svg";
 import "./Navigation.css";
 
 export default function Navigation({
@@ -12,31 +12,41 @@ export default function Navigation({
   if (isLoggedIn) {
     content = (
       <>
-        <div className="header__links header__desktop">
-          <a href="movies" className="header__link">
+        <div className="navigation__links navigation_desktop">
+          <a href="movies" className="navigation__link">
             Фильмы
           </a>
-          <a href="saved-movies" className="header__link">
+          <a href="saved-movies" className="navigation__link">
             Сохранённые фильмы
           </a>
         </div>
-        <div className="header__account header__desktop">
-          <a href="profile" className="header__account-link">
+
+        <div className="navigation__account navigation_desktop">
+          <a href="profile" className="navigation__account-link">
             Аккаунт
           </a>
-          <div className="header__account-body">
-            <img className="header__account-logo" src={account} alt="account" />
+          <div className="navigation__account-body">
+            <img
+              className="navigation__account-logo"
+              src={account}
+              alt="account"
+            />
           </div>
         </div>
+
         <div
-          className={`header__burger ${
-            isMenuOpen ? "header__burger_active" : ""
+          className={`navigation__burger ${
+            isMenuOpen ? "navigation__burger_active" : ""
           }`}
           onClick={() => setMenuOpen(!isMenuOpen)}
         />
-        
-        <div className={`navigation__menu ${isMenuOpen && "navigation__menu_active"}`}>
-          <div className="navigation__links">
+
+        <div
+          className={`navigation__menu ${
+            isMenuOpen && "navigation__menu_active"
+          }`}
+        >
+          <div className="navigation__links navigation_mobile">
             <a href="/" className="navigation__link">
               Главная
             </a>
@@ -47,7 +57,7 @@ export default function Navigation({
               Сохранённые фильмы
             </a>
           </div>
-          <div className="navigation__account">
+          <div className="navigation__account navigation_mobile">
             <a href="profile" className="navigation__account-link">
               Аккаунт
             </a>
@@ -64,7 +74,7 @@ export default function Navigation({
     );
   } else if (isStartPage) {
     content = (
-      <div className="navigation_start-page">
+      <div className="navigation">
         <a href="/signup" className="navigation__register">
           Регистрация
         </a>

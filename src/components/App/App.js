@@ -8,8 +8,8 @@ import NoPage from "../NoPage/NoPage";
 import Profile from "../Profile/Profile";
 import Register from "../Register/Register";
 import SavedMovies from "../SavedMovies/SavedMovies";
-import { authRegister, authTokenCheck, authCheckIn } from "../../utils/Auth";
-import { ProtectedRoute } from "../../utils/ProtectedRoute";
+import { authRegister, authTokenCheck, authCheckIn } from "../../utils/MainApi";
+// import { ProtectedRoute } from "../../utils/ProtectedRoute";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -24,6 +24,7 @@ function App() {
     setIsLoading(true);
     authRegister(user)
       .then((res) => {
+        console.log(res)
         setCurrentUser(res);
         localStorage.setItem("jwt", res.token);
         history("/signin");
@@ -34,6 +35,7 @@ function App() {
       })
       .finally(() => setIsLoading(false));
   }
+
 
   // функция входа в аккаунт
   function handleAuth(user) {
@@ -66,11 +68,9 @@ function App() {
 
   // функция авторизации
   const authorisation = async (jwt) => {
-    console.log("auth")
     authTokenCheck(jwt)
       .then((res) => {
         if (res) {
-          console.log("auth_true")
           setLoggedIn(true);
           setCurrentUser({
             id: res._id,
@@ -120,35 +120,34 @@ function App() {
             />
             <Route
               path="movies"
-              element={
-                <ProtectedRoute
+              element={ <Movies /> }
+                /* <ProtectedRoute
                   loggedIn={loggedIn}
                   path="movies"
                   component={Movies}
                 />
-              }
+              } */
             />
             <Route
               path="saved-movies"
-              element={
-                <ProtectedRoute
+              element={ <SavedMovies /> }
+                /* <ProtectedRoute
                   loggedIn={loggedIn}
                   path="saved-movies"
                   component={<SavedMovies />}
                 />
-              }
+              } */
             />
             <Route
               path="profile"
-              element={
-                <ProtectedRoute
+              element={<Profile />}
+                /* <ProtectedRoute
                   loggedIn={loggedIn}
                   path="profile"
                   component={<Profile />}
                 />
-              }
+              } */
             />
-            {/* <Route path="profile" element={<Profile />} /> */}
             <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>

@@ -7,3 +7,10 @@
   color: #ee3465;
   margin: 16px 0 auto;
 }
+
+@media screen and (max-width: 600px) {
+  .profile__link {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

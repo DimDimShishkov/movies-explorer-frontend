@@ -1,0 +1,12 @@
+.profile__submit-error {
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 13px;
+  margin: 0;
+  text-align: center;
+  color: #ff004c;
+  position: absolute;
+  top: -20px;
+  left: 0;
+  right: 0;
+}

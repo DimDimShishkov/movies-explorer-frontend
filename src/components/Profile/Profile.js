@@ -1,45 +1,72 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import { useForm } from "react-hook-form";
 import Header from "../Header/Header";
 import "./Profile.css";
 
-export default function Profile() {
+export default function Profile({ handleSubmitForm, isLoading, errorType }) {
   const currentUser = React.useContext(CurrentUserContext);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [buttonText, setButtonText] = useState("Редактировать");
-  const [isLoading, setIsLoading] = useState(false);
-
-  // валидация формы
-  const [errorsName, setErrorsName] = useState({
-    name: false,
-    email: false,
-  });
-  const [errorMessage, setErrorMessage] = useState({
-    name: "",
-    email: "",
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({
+    mode: "onChange",
   });
 
-  function handleNameChange(evt) {
-    setName(evt.target.value);
+  const [buttonText, setButtonText] = useState("Сохранить");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const onSubmit = (data) => handleSubmitForm(data);
+
+  let submitButtonContent;
+  if (isValid) {
+    submitButtonContent = (
+      <div className="profile__submit-container">
+        {errorMessage && (
+          <span className="profile__submit-error">{errorMessage}</span>
+        )}
+        <button
+          type="submit"
+          className={`profile__submit-button ${
+            !isValid && "profile__submit-button_disabled"
+          } `}
+          disabled={!isValid}
+        >
+          {buttonText}
+        </button>
+      </div>
+    );
+  } else {
+    submitButtonContent = (
+      <div className="profile__submit-container">
+        <span className="profile__span">Редактировать</span>
+        <span onClick={() => console.log(123)} className="profile__link">
+          Выйти из аккаунта
+        </span>
+      </div>
+    );
   }
 
-  function handleEmailChange(evt) {
-    setEmail(evt.target.value);
-  }
-
-  function handleSubmit(evt) {
-    evt.preventDefault();
+  useEffect(() => {
     if (isLoading) {
       setButtonText("Загрузка...");
     } else {
-      setButtonText("Редактировать");
+      setButtonText("Сохранить");
     }
-    /*     onUpdateUser({
-      name,
-      about: description,
-    }); */
-  }
+  }, [isLoading]);
+
+  useEffect(() => {
+    if (errorType === 409) {
+      setErrorMessage("Пользователь с таким email уже существует");
+    } else if (errorType === 401) {
+      setErrorMessage("Неправильные почта или пароль");
+    } else if (errorType) {
+      setErrorMessage("На сервере произошла ошибка");
+    } else {
+      setErrorMessage("");
+    }
+  }, [errorType]);
 
   return (
     <>
@@ -48,47 +75,61 @@ export default function Profile() {
         <div className="profile__section">
           <h2 className="profile__heading">Привет, {currentUser.name}!</h2>
           <form
-            autoComplete="new-email"
+            autoComplete="off"
             className="profile__form"
-            noValidate
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
           >
             <fieldset className="profile__fieldset">
               <label className="profile__label">
                 <p className="profile__title">Имя</p>
+
                 <input
-                  required={true}
-                  type="name"
+                  defaultValue={currentUser.name}
+                  {...register("name", {
+                    required: "Поле обязательно к заполнению.",
+                    minLength: {
+                      value: 2,
+                      message: "Минимальная длина имени 2 символа.",
+                    },
+                    maxLength: {
+                      value: 30,
+                      message: "Максимальная длина имени 30 символов.",
+                    },
+                  })}
                   className="profile__input"
-                  id="name"
                   placeholder="Введите новое имя"
-                  value={name || ""}
-                  onChange={handleNameChange}
+                  id="name"
+                  type="text"
                 />
-                <span className="profile__input-error profile__input-error_type_name"></span>
+                {errors.name && (
+                  <span className="profile__input-error">
+                    {errors.name.message}
+                  </span>
+                )}
               </label>
               <span className="profile__line" />
+
               <label className="profile__label">
                 <p className="profile__title">E-mail</p>
                 <input
-                  required={true}
-                  type="email"
+                  defaultValue={currentUser.email}
+                  {...register("email", {
+                    required: "Поле обязательно к заполнению.",
+                  })}
                   className="profile__input"
+                  placeholder="Введите новый e-mail"
                   id="email"
-                  placeholder="Введите пароль"
-                  value={email || ""}
-                  onChange={handleEmailChange}
+                  type="email"
                 />
-                <span className="profile__input-error profile__input-error_type_email"></span>
+                {errors.email && (
+                  <span className="profile__input-error">
+                    {errors.email.message}
+                  </span>
+                )}
               </label>
             </fieldset>
-            <button type="submit" className="profile__submit-button">
-              {buttonText}
-            </button>
+            {submitButtonContent}
           </form>
-          <a href="signout" className="profile__link">
-          Выйти из аккаунта
-          </a>
         </div>
       </section>
     </>

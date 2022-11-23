@@ -33,7 +33,6 @@ export const authCheckIn = (user) => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      name: user.name,
       email: user.email,
       password: user.password,
     }),
