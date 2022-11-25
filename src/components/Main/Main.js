@@ -10,13 +10,15 @@ import Techs from "../Techs/Techs";
 export default function Main() {
   return (
     <>
-    <Header isStartPage={true} />
-    <Promo />
-    <AboutProject />
-    <Techs />
-    <AboutMe />
-    <Portfolio />
-    <Footer />
+      <Header isStartPage={true} />
+      <div className="main">
+        <Promo />
+        <AboutProject />
+        <Techs />
+        <AboutMe />
+        <Portfolio />
+      </div>
+      <Footer />
     </>
   );
 }

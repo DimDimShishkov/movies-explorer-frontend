@@ -24,7 +24,7 @@
 
 @media screen and (max-width: 600px) {
   .search-form__section {
-    margin: 0 14px;
+    margin: 0 10px;
     width: auto;
     padding: 81px 0 10px;
   }

@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Preloader.css";
 
-export default function Preloader() {
-  const [isLoading, setIsLoading] = useState(false);
+export default function Preloader({isLoading, handleUploadMovies}) {
 
   let LoadingGear = (
     <section className="preloader__loading">
@@ -36,7 +35,7 @@ export default function Preloader() {
   let buttonMore = (
     <button
       className="preloader__button"
-      onClick={() => setIsLoading(!isLoading)}
+      onClick={handleUploadMovies}
     >
       Ещё
     </button>

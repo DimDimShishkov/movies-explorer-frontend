@@ -71,66 +71,68 @@ export default function Profile({ handleSubmitForm, isLoading, errorType }) {
   return (
     <>
       <Header isLoggedIn={true} />
-      <section className="profile">
-        <div className="profile__section">
-          <h2 className="profile__heading">Привет, {currentUser.name}!</h2>
-          <form
-            autoComplete="off"
-            className="profile__form"
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <fieldset className="profile__fieldset">
-              <label className="profile__label">
-                <p className="profile__title">Имя</p>
+      <section className="main">
+        <section className="profile">
+          <div className="profile__section">
+            <h2 className="profile__heading">Привет, {currentUser.name}!</h2>
+            <form
+              autoComplete="off"
+              className="profile__form"
+              onSubmit={handleSubmit(onSubmit)}
+            >
+              <fieldset className="profile__fieldset">
+                <label className="profile__label">
+                  <p className="profile__title">Имя</p>
 
-                <input
-                  defaultValue={currentUser.name}
-                  {...register("name", {
-                    required: "Поле обязательно к заполнению.",
-                    minLength: {
-                      value: 2,
-                      message: "Минимальная длина имени 2 символа.",
-                    },
-                    maxLength: {
-                      value: 30,
-                      message: "Максимальная длина имени 30 символов.",
-                    },
-                  })}
-                  className="profile__input"
-                  placeholder="Введите новое имя"
-                  id="name"
-                  type="text"
-                />
-                {errors.name && (
-                  <span className="profile__input-error">
-                    {errors.name.message}
-                  </span>
-                )}
-              </label>
-              <span className="profile__line" />
+                  <input
+                    defaultValue={currentUser.name}
+                    {...register("name", {
+                      required: "Поле обязательно к заполнению.",
+                      minLength: {
+                        value: 2,
+                        message: "Минимальная длина имени 2 символа.",
+                      },
+                      maxLength: {
+                        value: 30,
+                        message: "Максимальная длина имени 30 символов.",
+                      },
+                    })}
+                    className="profile__input"
+                    placeholder="Введите новое имя"
+                    id="name"
+                    type="text"
+                  />
+                  {errors.name && (
+                    <span className="profile__input-error">
+                      {errors.name.message}
+                    </span>
+                  )}
+                </label>
+                <span className="profile__line" />
 
-              <label className="profile__label">
-                <p className="profile__title">E-mail</p>
-                <input
-                  defaultValue={currentUser.email}
-                  {...register("email", {
-                    required: "Поле обязательно к заполнению.",
-                  })}
-                  className="profile__input"
-                  placeholder="Введите новый e-mail"
-                  id="email"
-                  type="email"
-                />
-                {errors.email && (
-                  <span className="profile__input-error">
-                    {errors.email.message}
-                  </span>
-                )}
-              </label>
-            </fieldset>
-            {submitButtonContent}
-          </form>
-        </div>
+                <label className="profile__label">
+                  <p className="profile__title">E-mail</p>
+                  <input
+                    defaultValue={currentUser.email}
+                    {...register("email", {
+                      required: "Поле обязательно к заполнению.",
+                    })}
+                    className="profile__input"
+                    placeholder="Введите новый e-mail"
+                    id="email"
+                    type="email"
+                  />
+                  {errors.email && (
+                    <span className="profile__input-error">
+                      {errors.email.message}
+                    </span>
+                  )}
+                </label>
+              </fieldset>
+              {submitButtonContent}
+            </form>
+          </div>
+        </section>
       </section>
     </>
   );

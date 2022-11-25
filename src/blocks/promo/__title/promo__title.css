@@ -4,7 +4,6 @@
   line-height: 58px;
   margin: 0;
   color: #ffffff;
-  letter-spacing: -0.04em;
 }
 
 @media screen and (max-width: 900px) {
@@ -19,5 +18,6 @@
   .promo__title {
     font-size: 30px;
     line-height: 38px;
+    letter-spacing: -0.04em;
   }
 }

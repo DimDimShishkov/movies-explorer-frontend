@@ -19,7 +19,7 @@ export default function Promo() {
           <img src={logo} alt="логотип" className="promo__logo" />
         </div>
         <div className="promo__container">
-          <a href="#" className="promo__link">
+          <a href="#portfolio" className="promo__link">
             Узнать больше
           </a>
         </div>

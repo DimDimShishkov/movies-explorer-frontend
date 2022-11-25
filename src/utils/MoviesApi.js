@@ -55,7 +55,7 @@ class Api {
         thumbnail: item.thumbnail,
         movieId: item.movieId,
         nameRU: item.nameRU,
-        nameEN: item.nameEN,      
+        nameEN: item.nameEN,
       }),
     }).then((res) => this._handleReturn(res));
   }
@@ -67,11 +67,19 @@ class Api {
       headers: this._headers,
     }).then((res) => this._handleReturn(res));
   }
+
+  // Удаление фильма
+  handleUploadMovies() {
+    return fetch(`${this._url}`, {
+      method: "GET",
+      headers: this._headers,
+    }).then((res) => this._handleReturn(res));
+  }
 }
 
 export const MoviesApi = new Api({
   // url: "https://api.movies-explorer-ddsh.nomoredomains.icu",
-  url: "https://localhost",
+  url: "https://api.nomoreparties.co/beatfilm-movies",
   headers: {
     "Content-Type": "application/json",
   },

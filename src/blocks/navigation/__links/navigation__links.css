@@ -7,5 +7,6 @@
   .navigation__links {
     flex-direction: column;
     gap: 28px;
+    align-items: center;
   }
 }

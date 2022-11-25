@@ -4,7 +4,9 @@
 @import url(../../blocks/search-form/__form/search-form__form.css);
 @import url(../../blocks/search-form/__search/search-form__search.css);
 @import url(../../blocks/search-form/__loupe/search-form__loupe.css);
+@import url(../../blocks/search-form/__fieldset/search-form__fieldset.css);
 @import url(../../blocks/search-form/__input/search-form__input.css);
+@import url(../../blocks/search-form/__input-error/search-form__input-error.css);
 @import url(../../blocks/search-form/__button/search-form__button.css);
 @import url(../../blocks/search-form/__separate/search-form__separate.css);
 @import url(../../blocks/search-form/__line/search-form__line.css);

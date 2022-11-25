@@ -85,12 +85,12 @@ function App() {
       });
   };
 
-  useEffect(() => {
-    let jwt = localStorage.getItem("jwt");
-    if (jwt) {
-      authorisation(jwt);
-    }
-  }, [loggedIn]);
+  // useEffect(() => {
+  //   let jwt = localStorage.getItem("jwt");
+  //   if (jwt) {
+  //     authorisation(jwt);
+  //   }
+  // }, [loggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>

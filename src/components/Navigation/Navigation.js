@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import account from "../../images/account.svg";
 import "./Navigation.css";
 
@@ -8,17 +9,38 @@ export default function Navigation({
 }) {
   const [isMenuOpen, setMenuOpen] = useState(false);
 
+  const activeMobileStyle = {
+    borderBottom: "2px solid #FFFFFF",
+    lineHeight: "26px",
+  };
+
+  const activeDesktopStyle = {
+    fontWeight: "500",
+  };
+
   let content;
   if (isLoggedIn) {
     content = (
       <>
         <div className="navigation__links navigation_desktop">
-          <a href="movies" className="navigation__link">
+          <NavLink
+            to="/movies"
+            className="navigation__link"
+            style={({ isActive }) =>
+              isActive ? activeDesktopStyle : undefined
+            }
+          >
             Фильмы
-          </a>
-          <a href="saved-movies" className="navigation__link">
+          </NavLink>
+          <NavLink
+            to="/saved-movies"
+            className="navigation__link"
+            style={({ isActive }) =>
+              isActive ? activeDesktopStyle : undefined
+            }
+          >
             Сохранённые фильмы
-          </a>
+          </NavLink>
         </div>
 
         <div className="navigation__account navigation_desktop">
@@ -50,12 +72,24 @@ export default function Navigation({
             <a href="/" className="navigation__link">
               Главная
             </a>
-            <a href="movies" className="navigation__link">
+            <NavLink
+              to="/movies"
+              className="navigation__link"
+              style={({ isActive }) =>
+                isActive ? activeMobileStyle : undefined
+              }
+            >
               Фильмы
-            </a>
-            <a href="saved-movies" className="navigation__link">
+            </NavLink>
+            <NavLink
+              to="/saved-movies"
+              className="navigation__link"
+              style={({ isActive }) =>
+                isActive ? activeMobileStyle : undefined
+              }
+            >
               Сохранённые фильмы
-            </a>
+            </NavLink>
           </div>
           <div className="navigation__account navigation_mobile">
             <a href="profile" className="navigation__account-link">

@@ -1,6 +1,12 @@
 .movies-card__like {
-  background: url(../../images/movies-card_like.png) center no-repeat;
+  background: url(../../../images/movies-card_like.png) center no-repeat;
   background-size: 24px 24px;
   width: 24px;
   height: 24px;
+  border: none;
+  transition: all .3s ease;
+}
+
+.movies-card__like:hover {
+  transform: scale(1.2);
 }

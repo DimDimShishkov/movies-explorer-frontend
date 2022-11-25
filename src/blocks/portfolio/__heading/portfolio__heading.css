@@ -2,13 +2,13 @@
   font-weight: 400;
   font-size: 18px;
   line-height: 20px;
-  margin: 0 0 50px;
+  margin: 0 0 40px;
   color: #8b8b8b;
 }
 
 @media screen and (max-width: 900px) {
   .portfolio__heading {
-    margin: 0 0 43px;
+    margin: 0 0 33px;
   }
 }
 
@@ -16,6 +16,6 @@
   .portfolio__heading {
     font-size: 14px;
     line-height: 20px;
-    margin: 0 0 42px;
+    margin: 0 0 32px;
   }
 }
