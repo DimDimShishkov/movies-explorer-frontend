@@ -6,7 +6,7 @@ export default function NoPage() {
   const navigate = useNavigate();
 
   return (
-    <section className="main">
+    <main className="main">
       <section className="nopage">
         <h1 className="nopage__title">404</h1>
         <h2 className="nopage__subtitle">Страница не найдена.</h2>
@@ -14,6 +14,6 @@ export default function NoPage() {
           Назад
         </span>
       </section>
-    </section>
+    </main>
   );
 }

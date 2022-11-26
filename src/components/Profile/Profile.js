@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useForm } from "react-hook-form";
 import Header from "../Header/Header";
@@ -71,7 +71,7 @@ export default function Profile({ handleSubmitForm, isLoading, errorType }) {
   return (
     <>
       <Header isLoggedIn={true} />
-      <section className="main">
+      <main className="main">
         <section className="profile">
           <div className="profile__section">
             <h2 className="profile__heading">Привет, {currentUser.name}!</h2>
@@ -133,7 +133,7 @@ export default function Profile({ handleSubmitForm, isLoading, errorType }) {
             </form>
           </div>
         </section>
-      </section>
+      </main>
     </>
   );
 }

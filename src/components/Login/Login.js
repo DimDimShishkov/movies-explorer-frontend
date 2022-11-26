@@ -7,7 +7,7 @@ export default function Login({ handleSubmitForm, isLoading, errorType }) {
   return (
     <>
       <Header />
-      <section className="main">
+      <main className="main">
         <section className="login">
           <h1 className="login__title">Рады видеть!</h1>
           <Form
@@ -23,7 +23,7 @@ export default function Login({ handleSubmitForm, isLoading, errorType }) {
             </a>
           </div>
         </section>
-      </section>
+      </main>
     </>
   );
 }

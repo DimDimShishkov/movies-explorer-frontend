@@ -5,11 +5,6 @@
   margin: 0;
   letter-spacing: -0.04em;
   color: #ffffff;
-  text-decoration: none;
-}
-
-.portfolio__arrow:hover {
-  opacity: 0.8;
 }
 
 @media screen and (max-width: 600px) {

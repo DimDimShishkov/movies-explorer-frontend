@@ -11,13 +11,13 @@ export default function Main() {
   return (
     <>
       <Header isStartPage={true} />
-      <div className="main">
+      <main className="main">
         <Promo />
         <AboutProject />
         <Techs />
         <AboutMe />
         <Portfolio />
-      </div>
+      </main>
       <Footer />
     </>
   );

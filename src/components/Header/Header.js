@@ -21,7 +21,7 @@ export default function Header({ isLoggedIn = false, isStartPage = false }) {
   let content;
   if (isStartPage) {
     content = (
-      <section
+      <header
         className={`header header_start ${
           scrollPosition >= 100 ? "header_overlay" : ""
         }`}
@@ -32,24 +32,24 @@ export default function Header({ isLoggedIn = false, isStartPage = false }) {
           </a>
           <Navigation isStartPage={true} />
         </div>
-      </section>
+      </header>
     );
   } else if (isLoggedIn) {
     content = (
-      <section className="header header_logged">
+      <header className="header header_logged">
         <a className="header__link" href="/">
           <img src={logo} alt="logo" />
         </a>
         <Navigation isLoggedIn={true} />
-      </section>
+      </header>
     );
   } else {
     content = (
-      <section className="header header_auth">
+      <header className="header header_auth">
         <a className="header__link" href="/">
           <img src={logo} alt="logo" />
         </a>
-      </section>
+      </header>
     );
   }
 

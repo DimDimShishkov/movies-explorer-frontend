@@ -7,7 +7,7 @@ export default function Register({ handleSubmitForm, isLoading, errorType }) {
   return (
     <>
       <Header />
-      <section className="main">
+      <main className="main">
         <section className="register">
           <h1 className="register__title">Добро пожаловать!</h1>
           <Form
@@ -23,7 +23,7 @@ export default function Register({ handleSubmitForm, isLoading, errorType }) {
             </a>
           </div>
         </section>
-      </section>
+      </main>
     </>
   );
 }

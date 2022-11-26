@@ -17,39 +17,35 @@ export default function SearchForm() {
   return (
     <section className="search-form">
       <div className="search-form__section">
-        <div className="search-form__content">
-          <form
-            className="search-form__form"
-            autoComplete="off"
-            noValidate
-            onSubmit={handleSubmit(onSubmit)}
-          >
-            <div className="search-form__search">
-              <div className="search-form__loupe" />
-              <fieldset className="search-form__fieldset">
-                <input
-                  {...register("movie", {
-                    required: "Поле обязательно к заполнению.",
-                  })}
-                  className={`search-form__input ${
-                    errors.movie ? "search-form__input_type_error" : ""
-                  }`}
-                  placeholder="Фильм"
-                  id="movie"
-                  type="text"
-                />
-                {errors.movie && (
-                  <span className="search-form__input-error">
-                    {errors.movie.message}
-                  </span>
-                )}
-              </fieldset>
-            </div>
-            <button type="submit" className="search-form__button"></button>
-          </form>
-          <span className="search-form__separate" />
-          <FilterCheckbox checkboxCodition={setShortFilms} />
-        </div>
+        <form
+          className="search-form__form"
+          autoComplete="off"
+          noValidate
+          onSubmit={handleSubmit(onSubmit)}
+        >
+          <fieldset className="search-form__fieldset">
+            <input
+              {...register("movie", {
+                required: "Поле обязательно к заполнению.",
+              })}
+              className={`search-form__input ${
+                errors.movie ? "search-form__input_type_error" : ""
+              }`}
+              placeholder="Фильм"
+              id="movie"
+              type="text"
+            />
+            {errors.movie && (
+              <span className="search-form__input-error">
+                {errors.movie.message}
+              </span>
+            )}
+          </fieldset>
+          <button type="submit" className="search-form__button">
+            Найти
+          </button>
+        </form>
+        <FilterCheckbox checkboxCodition={setShortFilms} />
         <span className="search-form__line" />
       </div>
     </section>

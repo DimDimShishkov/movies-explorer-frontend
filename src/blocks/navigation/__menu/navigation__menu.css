@@ -3,13 +3,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  position: absolute;
+  position: fixed;
   right: -100%;
   top: 0;
+  bottom: 0;
   width: 100%;
   max-width: 520px;
-  background: #000000;
-  height: 100vh;
+  background: #202020;
   transition: all 0.3s ease;
   z-index: 3;
 }

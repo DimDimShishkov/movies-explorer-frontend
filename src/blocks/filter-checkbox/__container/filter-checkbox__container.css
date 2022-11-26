@@ -1,6 +1,7 @@
 .filter-checkbox__container {
   display: flex;
   flex-direction: row;
-  gap: 14px;
+  /* gap: 14px; */
+  gap: 12px;
   align-items: center;
 }

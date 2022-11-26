@@ -36,11 +36,11 @@ export default function Movies() {
   return (
     <>
       <Header isLoggedIn={true} />
-      <section className="main">
+      <main className="main">
         <SearchForm />
         <MoviesCardList movies={movieItems} saved={true}/>
         <Preloader isLoading={isLoading} handleUploadMovies={biba} />
-      </section>
+      </main>
       <Footer />
     </>
   );
