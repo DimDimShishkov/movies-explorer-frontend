@@ -3,16 +3,15 @@ import { useForm } from "react-hook-form";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
 
-export default function SearchForm() {
-  const [isShortFilms, setShortFilms] = useState(false);
-
+export default function SearchForm({handleSubmitForm}) {
+  const [isShortFilm, setIsShortFilm] = useState(false)
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm({ mode: "onChange" });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => handleSubmitForm(data.movie, isShortFilm);
 
   return (
     <section className="search-form">
@@ -26,7 +25,7 @@ export default function SearchForm() {
           <fieldset className="search-form__fieldset">
             <input
               {...register("movie", {
-                required: "Поле обязательно к заполнению.",
+                required: "Нужно ввести ключевое слово.",
               })}
               className={`search-form__input ${
                 errors.movie ? "search-form__input_type_error" : ""
@@ -45,7 +44,7 @@ export default function SearchForm() {
             Найти
           </button>
         </form>
-        <FilterCheckbox checkboxCodition={setShortFilms} />
+        <FilterCheckbox checkboxCodition={setIsShortFilm} />
         <span className="search-form__line" />
       </div>
     </section>

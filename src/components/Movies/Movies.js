@@ -1,45 +1,53 @@
-import React, { useState } from "react";
-import { MoviesApi } from "../../utils/MoviesApi";
+import React from "react";
 import Preloader from "../Preloader/Preloader";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 
-export default function Movies() {
-  const [movieItems, setMovieItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+export default function Movies({
+  handleSubmitForm,
+  movies,
+  savedMovies,
+  filteredMovies,
+  isLoading,
+  moviesErr,
+  handleCardLike,
+}) {
+  let content;
 
-  const [lastI, setLastI] = useState(0);
-  let arr = movieItems;
 
-  // костыль для проверки верстки
-  function biba() {
-    setIsLoading(true);
-    return MoviesApi.handleUploadMovies()
-      .then((res) => {
-        let i = lastI;
-        while (i < lastI + 3) {
-          arr.push(res[i]);
-          i++;
-          setLastI(i);
-        }
-        setMovieItems(arr);
-        //  console.log(res)
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-      .finally(() => setIsLoading(false));
+  if (isLoading) {
+    content = <Preloader isLoading={true} />;
+  } else if (moviesErr) {
+    content = (
+      <p className="movies-card-list__text">
+        Во время запроса произошла ошибка. Возможно, проблема с соединением или
+        сервер недоступен. Подождите немного и попробуйте ещё раз
+      </p>
+    );
+  } else if (filteredMovies?.length === 0) {
+    content = <p className="movies-card-list__text">Ничего не найдено</p>;
+  } else if (filteredMovies?.length > 0) {
+    content = (
+      <MoviesCardList
+        movies={movies}
+        savedMovies={savedMovies}
+        filteredMovies={filteredMovies}
+        isSavedPage={false}
+        handleCardLike={handleCardLike}
+      />
+    );
+  } else {
+    content = <></>;
   }
 
   return (
     <>
       <Header isLoggedIn={true} />
       <main className="main">
-        <SearchForm />
-        <MoviesCardList movies={movieItems} saved={true}/>
-        <Preloader isLoading={isLoading} handleUploadMovies={biba} />
+        <SearchForm handleSubmitForm={handleSubmitForm} />
+        {content}
       </main>
       <Footer />
     </>

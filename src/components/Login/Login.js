@@ -15,6 +15,7 @@ export default function Login({ handleSubmitForm, isLoading, errorType }) {
             isLoading={isLoading}
             errorType={errorType}
             formType={""}
+            submitButtonText={"Войти"}
           />
           <div className="login__container">
             <h2 className="login__subtitle">Ещё не зарегистрированы?</h2>

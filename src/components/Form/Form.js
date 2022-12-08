@@ -7,8 +7,9 @@ export default function Form({
   isLoading,
   errorType,
   formType,
+  submitButtonText
 }) {
-  const [buttonText, setButtonText] = useState("Зарегистрироваться");
+  const [buttonText, setButtonText] = useState(submitButtonText);
   const [errorMessage, setErrorMessage] = useState("");
 
   const {
@@ -23,7 +24,7 @@ export default function Form({
     if (isLoading) {
       setButtonText("Загрузка...");
     } else {
-      setButtonText("Зарегистрироваться");
+      setButtonText(submitButtonText);
     }
   }, [isLoading]);
 
@@ -54,6 +55,11 @@ export default function Form({
             maxLength: {
               value: 30,
               message: "Максимальная длина имени 30 символов.",
+            },
+            pattern: {
+              value: /^[a-za-яё -]+$/i,
+              message:
+                "Имя должно состоять из латиницы, кириллицы, пробелов или дефисов.",
             },
           })}
           className={`form__input ${
@@ -87,7 +93,7 @@ export default function Form({
             {...register("email", {
               required: "Поле обязательно к заполнению.",
               pattern: {
-                value: /^\S+@\S+$/i,
+                value: /^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$/,
                 message: "Неправильный формат почты.",
               },
             })}

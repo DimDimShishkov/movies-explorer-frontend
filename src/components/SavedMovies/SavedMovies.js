@@ -1,43 +1,56 @@
-import React, { useEffect, useState } from "react";
-import { MoviesApi } from "../../utils/MoviesApi";
+import React, { useEffect } from "react";
 import Header from "../Header/Header";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 import Footer from "../Footer/Footer";
+import Preloader from "../Preloader/Preloader";
 
-export default function SavedMovies() {
-  const [movieItems, setMovieItems] = useState([]);
-
-  const [lastI, setLastI] = useState(0);
-  let arr = movieItems;
-
-  // костыль для проверки верстки
-  function biba() {
-    return MoviesApi.handleUploadMovies()
-      .then((res) => {
-        let i = lastI;
-        while (i < lastI + 3) {
-          arr.push(res[i]);
-          i++;
-          setLastI(i);
-        }
-        setMovieItems(arr);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+export default function SavedMovies({
+  handleCardDislike,
+  handleSubmitForm,
+  handleUploadSavedMovies,
+  movies,
+  isLoading,
+  moviesErr,
+  filteredMovies
+}) {
+  let content;
 
   useEffect(() => {
-    biba();
+    handleUploadSavedMovies();
   }, []);
+
+  if (isLoading) {
+    content = <Preloader isLoading={true} />;
+  } else if (moviesErr) {
+    content = (
+      <p className="movies-card-list__text">
+        Во время запроса произошла ошибка. Возможно, проблема с соединением или
+        сервер недоступен. Подождите немного и попробуйте ещё раз
+      </p>
+    );
+  } else if (movies?.length === 0) {
+    content = <p className="movies-card-list__text">Ничего не найдено</p>;
+  } else if (movies?.length > 0) {
+    content = (
+      <MoviesCardList
+        movies={movies}
+        savedMovies={movies}
+        filteredMovies={filteredMovies}
+        isSavedPage={true}
+        handleCardLike={handleCardDislike}
+      />
+    );
+  } else {
+    content = <></>;
+  }
 
   return (
     <>
       <Header isLoggedIn={true} />
       <main className="main">
-        <SearchForm />
-        <MoviesCardList movies={movieItems} saved={false} />
+        <SearchForm handleSubmitForm={handleSubmitForm} />
+        {content}
       </main>
       <Footer />
     </>
