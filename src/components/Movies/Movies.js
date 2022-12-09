@@ -13,9 +13,9 @@ export default function Movies({
   isLoading,
   moviesErr,
   handleCardLike,
+  handleCheckboxStatus,
 }) {
   let content;
-
 
   if (isLoading) {
     content = <Preloader isLoading={true} />;
@@ -46,7 +46,11 @@ export default function Movies({
     <>
       <Header isLoggedIn={true} />
       <main className="main">
-        <SearchForm handleSubmitForm={handleSubmitForm} />
+        <SearchForm
+          movies={"movies"}
+          handleSubmitForm={handleSubmitForm}
+          handleCheckboxStatus={handleCheckboxStatus}
+        />
         {content}
       </main>
       <Footer />

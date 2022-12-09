@@ -3,10 +3,9 @@
   max-width: 310px;
   font-size: 13px;
   line-height: 16px;
-  color: #ffffff;
+  color: rgba(255, 255, 255, 0.5);
   margin: 0;
   mix-blend-mode: normal;
-  opacity: 0.5;
 }
 
 @media screen and (max-width: 900px) {

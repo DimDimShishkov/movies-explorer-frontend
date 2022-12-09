@@ -5,5 +5,6 @@
 @import url(../../blocks/search-form/__input/search-form__input.css);
 @import url(../../blocks/search-form/__input-error/search-form__input-error.css);
 @import url(../../blocks/search-form/__button/search-form__button.css);
+@import url(../../blocks/search-form/__button/_disabled/search-form__button_disabled.css);
 @import url(../../blocks/search-form/__separate/search-form__separate.css);
 @import url(../../blocks/search-form/__line/search-form__line.css);

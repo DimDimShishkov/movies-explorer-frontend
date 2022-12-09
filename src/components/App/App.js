@@ -80,13 +80,13 @@ function App() {
   }
 
   // загрузка фильмов с сервера
-  function handleUploadMovies() {
+/*   function handleUploadMovies() {
     MoviesApi.handleUploadMovies()
       .then((res) => {
         localStorage.setItem("movies", JSON.stringify(res));
       })
       .catch((err) => console.log(err));
-  }
+  } */
 
   // хук заполнения данных профиля и фильмов после авторизации
   useEffect(() => {
@@ -99,15 +99,15 @@ function App() {
       handleUploadSavedMovies();
     }
     setSavedMovieItems(JSON.parse(savedMovies));
-    let movies = localStorage.getItem("movies");
+/*     let movies = localStorage.getItem("movies");
     if (!movies) {
       handleUploadMovies();
     }
-    setMovieItems(JSON.parse(movies));
+    setMovieItems(JSON.parse(movies)); */
   }, []);
 
   // функция выхода из аккаунта
-  function handleLoggegOut() {
+  function handleLoggedOut() {
     setIsLoading(false);
     authCheckOut();
     localStorage.removeItem("jwt");
@@ -154,21 +154,26 @@ function App() {
   }
 
   // поиск фильмов
-  function handleMovieSearch(criterion, isShort) {
+  function handleMovieSearch(MoviesArr, criterion, isShort) {
+    console.log(criterion)
     setMoviesErr(false);
-    let MoviesArr = localStorage.getItem("movies");
-/*     if (!MoviesArr) {
-      setIsLoading(true);
-      MoviesApi.handleUploadMovies()
-        .then((res) => {
-          localStorage.setItem("movies", JSON.stringify(res));
-          handleFilterMovies(res, criterion, isShort);
-        })
-        .catch((err) => setMoviesErr(err))
-        .finally(() => setIsLoading(false));
+    if (MoviesArr === "movies") {
+      let movies = localStorage.getItem("movies");
+      if (!movies) {
+        setIsLoading(true);
+        MoviesApi.handleUploadMovies()
+          .then((res) => {
+            localStorage.setItem("movies", JSON.stringify(res));
+            handleFilterMovies(res, criterion, isShort);
+          })
+          .catch((err) => setMoviesErr(err))
+          .finally(() => setIsLoading(false));
+      } else {
+        handleFilterMovies(MoviesArr, criterion, isShort);
+      }
     } else {
-    } */
-    handleFilterMovies(JSON.parse(MoviesArr), criterion, isShort);
+      handleFilterMovies(savedMovieItems, criterion, isShort, true);
+    }
   }
 
   // поиск по своим фильмам
@@ -204,7 +209,7 @@ function App() {
       <div className="page">
         <Routes>
           <Route path="/">
-            <Route index element={<Main />} />
+            <Route index element={<Main loggedIn={loggedIn} />} />
             <Route
               path="signup"
               element={
@@ -277,7 +282,7 @@ function App() {
                   component={Profile}
                   handleSubmitForm={handleUpdateProfileInfo}
                   isLoading={isLoading}
-                  handleLoggegOut={handleLoggegOut}
+                  handleLoggedOut={handleLoggedOut}
                   errorType={errorType}
                 />
               }

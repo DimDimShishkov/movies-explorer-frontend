@@ -12,13 +12,15 @@ export default function SavedMovies({
   movies,
   isLoading,
   moviesErr,
-  filteredMovies
+  filteredMovies,
+  handleCheckboxStatus,
 }) {
   let content;
 
-  useEffect(() => {
+  // убрать
+  /*   useEffect(() => {
     handleUploadSavedMovies();
-  }, []);
+  }, [handleUploadSavedMovies]); */
 
   if (isLoading) {
     content = <Preloader isLoading={true} />;
@@ -49,7 +51,11 @@ export default function SavedMovies({
     <>
       <Header isLoggedIn={true} />
       <main className="main">
-        <SearchForm handleSubmitForm={handleSubmitForm} />
+        <SearchForm
+          movies={"savedMovies"}
+          handleSubmitForm={handleSubmitForm}
+          handleCheckboxStatus={handleCheckboxStatus}
+        />
         {content}
       </main>
       <Footer />

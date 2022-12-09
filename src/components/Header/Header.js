@@ -30,7 +30,7 @@ export default function Header({ isLoggedIn = false, isStartPage = false }) {
           <a className="header__link" href="/">
             <img src={logo} alt="logo" />
           </a>
-          <Navigation isStartPage={true} />
+          <Navigation isLoggedIn={isLoggedIn} isStartPage={isStartPage} />
         </div>
       </header>
     );

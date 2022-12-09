@@ -106,7 +106,7 @@ export default function Navigation({
         </div>
       </>
     );
-  } else if (isStartPage) {
+  } else if (isStartPage && !isLoggedIn) {
     content = (
       <div className="navigation">
         <a href="/signup" className="navigation__register">
