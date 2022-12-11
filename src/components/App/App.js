@@ -28,8 +28,8 @@ function App() {
   const [errorType, setErrorType] = useState("");
   const [moviesErr, setMoviesErr] = useState(false);
   const [movieItems, setMovieItems] = useState([]);
-  const [longMovieItems, setLongMovieItems] = useState([])
-  const [shortMovieItems, setShortMovieItems] = useState([])
+  const [longMovieItems, setLongMovieItems] = useState([]);
+  const [shortMovieItems, setShortMovieItems] = useState([]);
   const [savedMovieItems, setSavedMovieItems] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
   const [moviesIsNotFound, setMoviesIsnotFound] = useState(false);
@@ -81,7 +81,7 @@ function App() {
       .catch((err) => setMoviesErr(err))
       .finally(() => setIsLoading(false));
   }
-/*   // загрузка фильмов с сервера
+  /*   // загрузка фильмов с сервера
   function handleUploadMovies() {
     setIsLoading(true);
     MoviesApi.handleUploadMovies()
@@ -166,9 +166,13 @@ function App() {
       }
     });
     if (arr.length === 0) {
-      (MoviesArr === "movies") ? setMoviesIsnotFound(true) : setSavedMoviesIsnotFound(true)
+      MoviesArr === "movies"
+        ? setMoviesIsnotFound(true)
+        : setSavedMoviesIsnotFound(true);
     } else {
-      (MoviesArr === "movies") ? setMoviesIsnotFound(false) : setSavedMoviesIsnotFound(false)
+      MoviesArr === "movies"
+        ? setMoviesIsnotFound(false)
+        : setSavedMoviesIsnotFound(false);
     }
     setMovieItems(arr);
     type ? setSavedMovieItems(arr) : setMovieItems(arr);
@@ -261,11 +265,13 @@ function App() {
                 />
               }
             />
-
             <Route
               path="movies"
               element={
-                <Movies
+                <ProtectedRoute
+                  loggedIn={loggedIn}
+                  path="movies"
+                  component={Movies}
                   handleSubmitForm={handleMovieSearch}
                   movies={movieItems}
                   savedMovies={savedMovieItems}
@@ -276,17 +282,6 @@ function App() {
                   handleCheckboxStatus={handleCheckboxStatus}
                 />
               }
-              /* <ProtectedRoute
-                  loggedIn={loggedIn}
-                  path="movies"
-                  component={<Movies
-                  handleSubmitForm={handleMovieSearch}
-                  movies={movieItems}
-                  isLoading={isLoading}
-                  moviesErr={moviesErr}
-                />}
-                />
-              } */
             />
             <Route
               path="saved-movies"

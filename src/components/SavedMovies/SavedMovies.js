@@ -15,18 +15,15 @@ export default function SavedMovies({
   handleCheckboxStatus,
 }) {
   let content;
-  // убрать
-  /*   useEffect(() => {
-    handleUploadSavedMovies();
-  }, [handleUploadSavedMovies]); */
   let savedMoviesFound = JSON.parse(localStorage.getItem("savedMoviesFound"));
+
   useEffect(() => {
     if (!savedMoviesFound) {
       content = <></>;
     }
   }, []);
 
-  if (!!savedMoviesFound) {
+  if (savedMoviesFound) {
     content = (
       <MoviesCardList
         movies={savedMoviesFound}
@@ -55,8 +52,6 @@ export default function SavedMovies({
         handleCardLike={handleCardDislike}
       />
     );
-  } else {
-    content = <></>;
   }
 
   return (

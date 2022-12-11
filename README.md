@@ -1,4 +1,5 @@
-https://disk.yandex.ru/d/QlC8xagwl5i0PQ
+ссылка на пуллреквест:
+https://github.com/DimDimShishkov/movies-explorer-frontend/pull/4
 
 Дипломный проект «Movies»
 Описание проекта
