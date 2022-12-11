@@ -1,0 +1,18 @@
+.profile__form {
+  margin-top: 124px;
+  width: 410px;
+  height: 100%;
+}
+
+@media screen and (max-width: 900px) {
+  .profile__form {
+    margin-top: 98px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .profile__form {
+    width: 260px;
+    margin-top: 81px;
+  }
+}

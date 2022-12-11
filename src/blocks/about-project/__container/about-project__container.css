@@ -1,0 +1,17 @@
+.about-project__container {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+@media screen and (max-width: 900px) {
+  .about-project__container {
+    gap: 22px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .about-project__container {
+    gap: 15px;
+  }
+}

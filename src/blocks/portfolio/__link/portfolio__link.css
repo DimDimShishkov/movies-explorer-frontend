@@ -1,0 +1,12 @@
+.portfolio__link {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-decoration: none;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.portfolio__link:hover {
+  opacity: 0.8;
+}

@@ -1,0 +1,15 @@
+.about-project__progress-text {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 17px;
+  margin: 0;
+  text-align: center;
+  color: #8b8b8b;
+}
+
+@media screen and (max-width: 600px) {
+  .about-project__progress-text {
+    font-size: 11px;
+    line-height: 13px;
+  }
+}

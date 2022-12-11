@@ -1,0 +1,18 @@
+.movies-card__delete {
+  background: url(../../../images/movies-card_delete.svg) center no-repeat;
+  background-size: 8px 8px;
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  margin-right: 4px;
+  box-sizing: border-box;
+/*   background-size: 24px 24px;
+  width: 24px;
+  height: 24px; */
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.movies-card__delete:hover {
+  transform: scale(1.2);
+}

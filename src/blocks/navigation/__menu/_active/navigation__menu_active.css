@@ -1,0 +1,4 @@
+.navigation__menu_active {
+  right: 0;
+  display: flex;
+}

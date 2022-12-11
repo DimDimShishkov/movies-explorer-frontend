@@ -1,0 +1,15 @@
+@import url(../../blocks/navigation/navigation.css);
+@import url(../../blocks/navigation/_type/navigation_desktop.css);
+@import url(../../blocks/navigation/_type/navigation_mobile.css);
+@import url(../../blocks/navigation/__register/navigation__register.css);
+@import url(../../blocks/navigation/__auth/navigation__auth.css);
+@import url(../../blocks/navigation/__links/navigation__links.css);
+@import url(../../blocks/navigation/__link/navigation__link.css);
+@import url(../../blocks/navigation/__account/navigation__account.css);
+@import url(../../blocks/navigation/__account-link/navigation__account-link.css);
+@import url(../../blocks/navigation/__account-body/navigation__account-body.css);
+@import url(../../blocks/navigation/__account-logo/navigation__account-logo.css);
+@import url(../../blocks/navigation/__burger/navigation__burger.css);
+@import url(../../blocks/navigation/__burger/_active/navigation__burger_active.css);
+@import url(../../blocks/navigation/__menu/navigation__menu.css);
+@import url(../../blocks/navigation/__menu/_active/navigation__menu_active.css);

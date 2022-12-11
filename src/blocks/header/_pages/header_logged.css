@@ -1,0 +1,28 @@
+.header_logged {
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 18px 0;
+  box-sizing: border-box;
+  position: relative;
+}
+
+@media screen and (max-width: 1200px) {
+  .header_logged {
+    padding: 18px 30px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .header_logged {
+    padding: 15px 30px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .header_logged {
+    padding: 15px 14px;
+  }
+}

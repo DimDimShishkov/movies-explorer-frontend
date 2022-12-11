@@ -1,0 +1,13 @@
+.about-project__progress {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+  .about-project__progress {
+    gap: 9px;
+  }
+}

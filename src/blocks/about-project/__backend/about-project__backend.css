@@ -1,0 +1,8 @@
+.about-project__backend {
+  background: #3ddc84;
+  height: 36px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

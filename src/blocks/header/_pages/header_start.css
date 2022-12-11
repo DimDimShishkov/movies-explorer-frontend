@@ -1,0 +1,7 @@
+.header_start {
+  width: auto;
+  position: fixed;
+  left: 0;
+  right: 0;
+  transition: all 0.3s ease;
+}

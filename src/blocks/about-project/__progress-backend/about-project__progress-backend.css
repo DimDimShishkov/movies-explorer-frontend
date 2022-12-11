@@ -1,0 +1,15 @@
+.about-project__progress-backend {
+  max-width: 228px;
+}
+
+@media screen and (max-width: 900px) {
+  .about-project__progress-backend {
+    max-width: 140px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .about-project__progress-backend {
+    max-width: 100px;
+  }
+}

@@ -1,0 +1,15 @@
+.navigation__menu {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  position: fixed;
+  right: -100%;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  max-width: 520px;
+  background: #202020;
+  transition: all 0.3s ease;
+  z-index: 3;
+}

@@ -1,0 +1,7 @@
+.about-me__avatar {
+  border-radius: 10px;
+  max-width: 290px;
+  max-height: 350px;
+  object-fit: cover;
+  aspect-ratio: 4 / 6;
+}

@@ -1,0 +1,15 @@
+.about-project__backend-text {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  margin: 0;
+  color: #000000;
+}
+
+@media screen and (max-width: 600px) {
+  .about-project__backend-text {
+    font-size: 11px;
+    line-height: 13px;
+  }
+}

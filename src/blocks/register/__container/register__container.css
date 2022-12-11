@@ -1,0 +1,15 @@
+.register__container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 17px 0 40px;
+  width: 100%;
+}
+
+@media screen and (max-width: 600px) {
+  .register__container {
+    margin: 13px 0 40px;
+  }
+}

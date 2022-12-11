@@ -1,0 +1,13 @@
+.profile__span {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  color: #ffffff;
+}
+
+@media screen and (max-width: 600px) {
+  .profile__span {
+    font-size: 12px;
+    line-height: 15px;
+  }
+}

@@ -1,0 +1,15 @@
+.register {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 396px;
+  min-height: 100vh;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 600px) {
+  .register {
+    max-width: 260px;
+  }
+}

@@ -1,0 +1,22 @@
+.techs__containers {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 100px;
+}
+
+@media screen and (max-width: 900px) {
+  .techs__containers {
+    margin-top: 83px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .techs__containers {
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
