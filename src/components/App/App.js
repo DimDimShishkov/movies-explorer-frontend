@@ -30,8 +30,9 @@ function App() {
   const [movieItems, setMovieItems] = useState([]);
   const [longMovieItems, setLongMovieItems] = useState([]);
   const [shortMovieItems, setShortMovieItems] = useState([]);
+  const [longSavedMovieItems, setLongSavedMovieItems] = useState([]);
+  const [shortSavedMovieItems, setShortSavedMovieItems] = useState([]);
   const [savedMovieItems, setSavedMovieItems] = useState([]);
-  const [filteredMovies, setFilteredMovies] = useState([]);
   const [moviesIsNotFound, setMoviesIsnotFound] = useState(false);
   const [savedMoviesIsNotFound, setSavedMoviesIsnotFound] = useState(false);
   const history = useNavigate();
@@ -152,19 +153,20 @@ function App() {
   ) {
     let arr = movies.filter((movie) => {
       if (movie.director.toLowerCase().includes(criterion.toLowerCase())) {
-        return isShort ? movie.duration <= 40 && movie : movie;
+        return movie;
       } else if (movie.nameRU.toLowerCase().includes(criterion.toLowerCase())) {
-        return isShort ? movie.duration <= 40 && movie : movie;
+        return movie;
       } else if (movie.nameEN.toLowerCase().includes(criterion.toLowerCase())) {
-        return isShort ? movie.duration <= 40 && movie : movie;
+        return movie;
       } else if (
         movie.country.toLowerCase().includes(criterion.toLowerCase())
       ) {
-        return isShort ? movie.duration <= 40 && movie : movie;
+        return movie;
       } else {
         return false;
       }
     });
+    // если не найдено
     if (arr.length === 0) {
       MoviesArr === "movies"
         ? setMoviesIsnotFound(true)
@@ -174,9 +176,42 @@ function App() {
         ? setMoviesIsnotFound(false)
         : setSavedMoviesIsnotFound(false);
     }
-    setMovieItems(arr);
-    type ? setSavedMovieItems(arr) : setMovieItems(arr);
+    // разделение на длинные и короткие фильмы
+    let shortFilms = [];
+    let longFilms = [];
+    if (type) {
+      setLongSavedMovieItems([]);
+      setShortSavedMovieItems([]);
+      arr.forEach((movie) => {
+        movie.duration <= 40 ? shortFilms.push(movie) : longFilms.push(movie);
+      });
+      setLongSavedMovieItems(longFilms);
+      setShortSavedMovieItems(shortFilms);
+      isShort ? setSavedMovieItems(shortFilms) : setSavedMovieItems(longFilms)
+    } else {
+      setLongMovieItems([]);
+      setShortMovieItems([]);
+      arr.forEach((movie) => {
+        movie.duration <= 40 ? shortFilms.push(movie) : longFilms.push(movie);
+      });
+      setLongMovieItems(longFilms);
+      setShortMovieItems(shortFilms);
+      isShort ? setMovieItems(shortFilms) : setMovieItems(longFilms)
+    }
     localStorage.setItem(`${MoviesArr}Found`, JSON.stringify(arr));
+  }
+
+  // смена чекбокса "короткометражки"
+  function handleCheckboxStatus(isShort, type) {
+    if (isShort) {
+      type
+        ? setSavedMovieItems(shortSavedMovieItems)
+        : setMovieItems(shortMovieItems);
+    } else {
+      type
+        ? setSavedMovieItems(longSavedMovieItems)
+        : setMovieItems(longMovieItems);
+    }
   }
 
   // поиск фильмов
@@ -230,13 +265,6 @@ function App() {
         })
         .catch((err) => console.log(err));
     }
-  }
-
-  function handleCheckboxStatus(isShort) {
-    let arr = movieItems.filter((movie) => {
-      return isShort ? movie.duration <= 40 && movie : movie;
-    });
-    setMovieItems(arr);
   }
 
   return (

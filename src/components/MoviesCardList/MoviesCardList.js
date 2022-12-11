@@ -59,7 +59,7 @@ export default function MoviesCardList({
   }
 
   const IsLikedCheck = (movie) => {
-    let savedMovie = savedMovies.filter((item) => {
+    let savedMovie = savedMovies?.filter((item) => {
       return item.movieId === movie.id && item.owner === currentUser.id;
     });
     return savedMovie[0]?._id;

@@ -1,6 +1,12 @@
 ссылка на пуллреквест:
 https://github.com/DimDimShishkov/movies-explorer-frontend/pull/4
 
+ссылка на фронтенд-часть проекта:
+https://movies-explorer-ddsh.nomoredomains.icu/
+
+ссылка на макет:
+https://disk.yandex.ru/d/QlC8xagwl5i0PQ
+
 Дипломный проект «Movies»
 Описание проекта
 

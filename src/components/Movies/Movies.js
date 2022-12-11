@@ -15,31 +15,25 @@ export default function Movies({
   handleCardLike,
   handleCheckboxStatus,
 }) {
-  // const [movieItems, setMovieItems] = useState([])
-
-  /*   const addTodo = useCallback(() => {
-    setMovieItems(movieItems);
-  }, [movies]); */
-
   let content;
   let moviesFound = JSON.parse(localStorage.getItem("moviesFound"));
 
   useEffect(() => {
     if (!moviesFound) {
       content = <></>;
-    }  
+    } else {
+      content = (
+        <MoviesCardList
+          movies={moviesFound}
+          savedMovies={savedMovies}
+          isSavedPage={false}
+          handleCardLike={handleCardLike}
+        />
+      );
+    }
   }, []);
 
-  if (moviesFound) {
-    content = (
-      <MoviesCardList
-        movies={moviesFound}
-        savedMovies={savedMovies}
-        isSavedPage={false}
-        handleCardLike={handleCardLike}
-      />
-    );
-  } else if (isLoading) {
+  if (isLoading) {
     content = <Preloader isLoading={true} />;
   } else if (moviesErr) {
     content = (

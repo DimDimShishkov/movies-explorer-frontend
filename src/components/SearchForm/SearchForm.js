@@ -19,7 +19,7 @@ export default function SearchForm({
 
   // смена чекбокса
   function handleCheckboxChange() {
-    handleCheckboxStatus(!isShortFilm);
+    handleCheckboxStatus(!isShortFilm, (MoviesArr === "savedMovies"));
     setIsShortFilm(!isShortFilm);
     localStorage.setItem(`${MoviesArr}Checkbox`, JSON.stringify(!isShortFilm));
   }
