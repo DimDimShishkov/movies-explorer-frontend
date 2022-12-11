@@ -13,19 +13,15 @@ export default function SearchForm({
 
   // получение изначального состояния чекбокса и инпута
   useEffect(() => {
-    if (MoviesArr === "movies") {
-      setIsShortFilm(JSON.parse(localStorage.getItem("moviesCheckbox")));
-      setNewValue(JSON.parse(localStorage.getItem("moviesSearch")));
-    } else {
-      setIsShortFilm(JSON.parse(localStorage.getItem("savedMoviesCheckbox")));
-      setNewValue(JSON.parse(localStorage.getItem("savedMoviesSearch")));
-    }
+    setIsShortFilm(JSON.parse(localStorage.getItem(`${MoviesArr}Checkbox`)));
+    setNewValue(JSON.parse(localStorage.getItem(`${MoviesArr}Search`)));
   }, [MoviesArr]);
 
   // смена чекбокса
   function handleCheckboxChange() {
     handleCheckboxStatus(!isShortFilm);
     setIsShortFilm(!isShortFilm);
+    localStorage.setItem(`${MoviesArr}Checkbox`, JSON.stringify(!isShortFilm));
   }
 
   // управление инпутом
@@ -33,6 +29,7 @@ export default function SearchForm({
     const value = evt.target.value;
     setNewValue(value);
     setValidationMessage(evt.target.validationMessage);
+    localStorage.setItem(`${MoviesArr}Search`, JSON.stringify(value));
   };
 
   // отправка формы

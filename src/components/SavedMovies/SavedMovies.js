@@ -8,21 +8,34 @@ import Preloader from "../Preloader/Preloader";
 export default function SavedMovies({
   handleCardDislike,
   handleSubmitForm,
-  handleUploadSavedMovies,
   movies,
+  moviesIsNotFound,
   isLoading,
   moviesErr,
-  filteredMovies,
   handleCheckboxStatus,
 }) {
   let content;
-
   // убрать
   /*   useEffect(() => {
     handleUploadSavedMovies();
   }, [handleUploadSavedMovies]); */
+  let savedMoviesFound = JSON.parse(localStorage.getItem("savedMoviesFound"));
+  useEffect(() => {
+    if (!savedMoviesFound) {
+      content = <></>;
+    }
+  }, []);
 
-  if (isLoading) {
+  if (!!savedMoviesFound) {
+    content = (
+      <MoviesCardList
+        movies={savedMoviesFound}
+        savedMovies={movies}
+        isSavedPage={true}
+        handleCardLike={handleCardDislike}
+      />
+    );
+  } else if (isLoading) {
     content = <Preloader isLoading={true} />;
   } else if (moviesErr) {
     content = (
@@ -31,14 +44,13 @@ export default function SavedMovies({
         сервер недоступен. Подождите немного и попробуйте ещё раз
       </p>
     );
-  } else if (movies?.length === 0) {
+  } else if (moviesIsNotFound) {
     content = <p className="movies-card-list__text">Ничего не найдено</p>;
   } else if (movies?.length > 0) {
     content = (
       <MoviesCardList
         movies={movies}
         savedMovies={movies}
-        filteredMovies={filteredMovies}
         isSavedPage={true}
         handleCardLike={handleCardDislike}
       />
@@ -52,7 +64,7 @@ export default function SavedMovies({
       <Header isLoggedIn={true} />
       <main className="main">
         <SearchForm
-          movies={"savedMovies"}
+          MoviesArr={"savedMovies"}
           handleSubmitForm={handleSubmitForm}
           handleCheckboxStatus={handleCheckboxStatus}
         />

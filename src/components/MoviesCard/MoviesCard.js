@@ -14,11 +14,13 @@ export default function MoviesCard({ movie, saved, isLiked, handleCardLike }) {
 
   if (!saved) {
     imageSource = (
-      <img
-        src={`https://api.nomoreparties.co${movie.image.url}`}
-        alt={movie.nameRU}
-        className="movies-card__image"
-      />
+      <a href={movie.trailerLink} target="_blank" rel="noreferrer">
+        <img
+          src={`https://api.nomoreparties.co${movie.image.url}`}
+          alt={movie.nameRU}
+          className="movies-card__image"
+        />
+      </a>
     );
     contentButton = (
       <button
@@ -29,18 +31,25 @@ export default function MoviesCard({ movie, saved, isLiked, handleCardLike }) {
       />
     );
   } else {
-    imageSource = <img
-    src={movie.image}
-    alt={movie.nameRU}
-    className="movies-card__image"
-  />
-    contentButton = <button className="movies-card__delete" 
-    onClick={() => handleCardLike(movie, saved)}
-    />;
+    imageSource = (
+      <a href={movie.trailerLink} target="_blank" rel="noreferrer">
+        <img
+          src={movie.image}
+          alt={movie.nameRU}
+          className="movies-card__image"
+        />
+      </a>
+    );
+    contentButton = (
+      <button
+        className="movies-card__delete"
+        onClick={() => handleCardLike(movie, saved)}
+      />
+    );
   }
 
   return (
-    <div className="movies-card" onClick={() => console.log(movie)}>
+    <div className="movies-card">
       {imageSource}
 
       <div className="movies-card__container">

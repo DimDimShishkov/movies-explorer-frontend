@@ -27,9 +27,13 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorType, setErrorType] = useState("");
   const [moviesErr, setMoviesErr] = useState(false);
-  const [movieItems, setMovieItems] = useState(null);
-  const [savedMovieItems, setSavedMovieItems] = useState(null);
+  const [movieItems, setMovieItems] = useState([]);
+  const [longMovieItems, setLongMovieItems] = useState([])
+  const [shortMovieItems, setShortMovieItems] = useState([])
+  const [savedMovieItems, setSavedMovieItems] = useState([]);
   const [filteredMovies, setFilteredMovies] = useState([]);
+  const [moviesIsNotFound, setMoviesIsnotFound] = useState(false);
+  const [savedMoviesIsNotFound, setSavedMoviesIsnotFound] = useState(false);
   const history = useNavigate();
 
   // функция регистрации
@@ -40,7 +44,6 @@ function App() {
       .catch((err) => setErrorType(err))
       .finally(() => setIsLoading(false));
   }
-
   // функция авторизации
   function handleAuth(user) {
     setIsLoading(true);
@@ -72,20 +75,19 @@ function App() {
 
   // загрузка сохраненных фильмов с сервера
   function handleUploadSavedMovies() {
+    setIsLoading(true);
     handleDownloadMovies()
-      .then((res) => {
-        localStorage.setItem("savedMovies", JSON.stringify(res));
-      })
-      .catch((err) => console.log(err));
+      .then((res) => localStorage.setItem("savedMovies", JSON.stringify(res)))
+      .catch((err) => setMoviesErr(err))
+      .finally(() => setIsLoading(false));
   }
-
-  // загрузка фильмов с сервера
-/*   function handleUploadMovies() {
+/*   // загрузка фильмов с сервера
+  function handleUploadMovies() {
+    setIsLoading(true);
     MoviesApi.handleUploadMovies()
-      .then((res) => {
-        localStorage.setItem("movies", JSON.stringify(res));
-      })
-      .catch((err) => console.log(err));
+      .then((res) => localStorage.setItem("movies", JSON.stringify(res)))
+      .catch((err) => setMoviesErr(err))
+      .finally(() => setIsLoading(false));
   } */
 
   // хук заполнения данных профиля и фильмов после авторизации
@@ -93,13 +95,14 @@ function App() {
     let jwt = localStorage.getItem("jwt");
     if (jwt) {
       authorization(jwt);
+      let savedMovies = localStorage.getItem("savedMovies");
+      if (!savedMovies) {
+        handleUploadSavedMovies();
+      }
+      setSavedMovieItems(JSON.parse(savedMovies));
     }
-    let savedMovies = localStorage.getItem("savedMovies");
-    if (!savedMovies) {
-      handleUploadSavedMovies();
-    }
-    setSavedMovieItems(JSON.parse(savedMovies));
-/*     let movies = localStorage.getItem("movies");
+
+    /*     let movies = localStorage.getItem("movies");
     if (!movies) {
       handleUploadMovies();
     }
@@ -113,6 +116,12 @@ function App() {
     localStorage.removeItem("jwt");
     localStorage.removeItem("movies");
     localStorage.removeItem("savedMovies");
+    localStorage.removeItem("moviesCheckbox");
+    localStorage.removeItem("savedMoviesCheckbox");
+    localStorage.removeItem("moviesSearch");
+    localStorage.removeItem("savedMoviesSearch");
+    localStorage.removeItem("moviesFound");
+    localStorage.removeItem("savedMoviesFound");
     setCurrentUser({});
     setLoggedIn(false);
     history("/");
@@ -134,7 +143,13 @@ function App() {
   }
 
   // функция фильтрации фильмов
-  function handleFilterMovies(movies, criterion, isShort, type = false) {
+  function handleFilterMovies(
+    MoviesArr,
+    movies,
+    criterion,
+    isShort,
+    type = false
+  ) {
     let arr = movies.filter((movie) => {
       if (movie.director.toLowerCase().includes(criterion.toLowerCase())) {
         return isShort ? movie.duration <= 40 && movie : movie;
@@ -150,29 +165,35 @@ function App() {
         return false;
       }
     });
-    setFilteredMovies(arr);
+    if (arr.length === 0) {
+      (MoviesArr === "movies") ? setMoviesIsnotFound(true) : setSavedMoviesIsnotFound(true)
+    } else {
+      (MoviesArr === "movies") ? setMoviesIsnotFound(false) : setSavedMoviesIsnotFound(false)
+    }
+    setMovieItems(arr);
+    type ? setSavedMovieItems(arr) : setMovieItems(arr);
+    localStorage.setItem(`${MoviesArr}Found`, JSON.stringify(arr));
   }
 
   // поиск фильмов
   function handleMovieSearch(MoviesArr, criterion, isShort) {
-    console.log(criterion)
     setMoviesErr(false);
     if (MoviesArr === "movies") {
-      let movies = localStorage.getItem("movies");
+      let movies = JSON.parse(localStorage.getItem("movies"));
       if (!movies) {
         setIsLoading(true);
         MoviesApi.handleUploadMovies()
           .then((res) => {
             localStorage.setItem("movies", JSON.stringify(res));
-            handleFilterMovies(res, criterion, isShort);
+            handleFilterMovies(MoviesArr, res, criterion, isShort);
           })
           .catch((err) => setMoviesErr(err))
           .finally(() => setIsLoading(false));
       } else {
-        handleFilterMovies(MoviesArr, criterion, isShort);
+        handleFilterMovies(MoviesArr, movies, criterion, isShort);
       }
     } else {
-      handleFilterMovies(savedMovieItems, criterion, isShort, true);
+      handleFilterMovies(MoviesArr, savedMovieItems, criterion, isShort, true);
     }
   }
 
@@ -183,25 +204,35 @@ function App() {
     handleFilterMovies(savedMovieItems, criterion, isShort, true);
   }
 
-  // сохранение фильмов
+  // установка лайка на карточку с фильмом
   function handleCardLike(movie, isLiked) {
     if (!isLiked) {
       handleLikeMovie(movie)
         .then((res) => {
-          setSavedMovieItems([res, ...savedMovieItems]);
+          let arr = [res, ...savedMovieItems];
+          setSavedMovieItems(arr);
+          localStorage.setItem("savedMovies", JSON.stringify(arr));
         })
         .catch((err) => console.log(err));
     } else {
       handleDislikeMovie(movie.id ? isLiked : movie._id)
         .then(() => {
-          setSavedMovieItems(
-            savedMovieItems.filter(
-              (item) => item._id !== (movie._id ? movie._id : isLiked)
-            )
+          let arr = savedMovieItems.filter(
+            (item) => item._id !== (movie._id ? movie._id : isLiked)
           );
+          setSavedMovieItems(arr);
+          localStorage.removeItem("savedMovies");
+          localStorage.setItem("savedMovies", JSON.stringify(arr));
         })
         .catch((err) => console.log(err));
     }
+  }
+
+  function handleCheckboxStatus(isShort) {
+    let arr = movieItems.filter((movie) => {
+      return isShort ? movie.duration <= 40 && movie : movie;
+    });
+    setMovieItems(arr);
   }
 
   return (
@@ -238,10 +269,11 @@ function App() {
                   handleSubmitForm={handleMovieSearch}
                   movies={movieItems}
                   savedMovies={savedMovieItems}
-                  filteredMovies={filteredMovies}
+                  moviesIsNotFound={moviesIsNotFound}
                   isLoading={isLoading}
                   moviesErr={moviesErr}
                   handleCardLike={handleCardLike}
+                  handleCheckboxStatus={handleCheckboxStatus}
                 />
               }
               /* <ProtectedRoute
@@ -263,13 +295,13 @@ function App() {
                   loggedIn={loggedIn}
                   path="saved-movies"
                   component={SavedMovies}
-                  handleSubmitForm={handleSavedMovieSearch}
-                  handleUploadSavedMovies={handleUploadSavedMovies}
+                  handleSubmitForm={handleMovieSearch}
                   movies={savedMovieItems}
-                  filteredMovies={filteredMovies}
+                  moviesIsNotFound={savedMoviesIsNotFound}
                   isLoading={isLoading}
                   moviesErr={moviesErr}
                   handleCardDislike={handleCardLike}
+                  handleCheckboxStatus={handleCheckboxStatus}
                 />
               }
             />

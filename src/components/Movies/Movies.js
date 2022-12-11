@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import Preloader from "../Preloader/Preloader";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
@@ -9,15 +9,37 @@ export default function Movies({
   handleSubmitForm,
   movies,
   savedMovies,
-  filteredMovies,
+  moviesIsNotFound,
   isLoading,
   moviesErr,
   handleCardLike,
   handleCheckboxStatus,
 }) {
-  let content;
+  // const [movieItems, setMovieItems] = useState([])
 
-  if (isLoading) {
+  /*   const addTodo = useCallback(() => {
+    setMovieItems(movieItems);
+  }, [movies]); */
+
+  let content;
+  let moviesFound = JSON.parse(localStorage.getItem("moviesFound"));
+
+  useEffect(() => {
+    if (!moviesFound) {
+      content = <></>;
+    }  
+  }, []);
+
+  if (moviesFound) {
+    content = (
+      <MoviesCardList
+        movies={moviesFound}
+        savedMovies={savedMovies}
+        isSavedPage={false}
+        handleCardLike={handleCardLike}
+      />
+    );
+  } else if (isLoading) {
     content = <Preloader isLoading={true} />;
   } else if (moviesErr) {
     content = (
@@ -26,20 +48,17 @@ export default function Movies({
         сервер недоступен. Подождите немного и попробуйте ещё раз
       </p>
     );
-  } else if (filteredMovies?.length === 0) {
+  } else if (moviesIsNotFound) {
     content = <p className="movies-card-list__text">Ничего не найдено</p>;
-  } else if (filteredMovies?.length > 0) {
+  } else if (movies?.length > 0) {
     content = (
       <MoviesCardList
         movies={movies}
         savedMovies={savedMovies}
-        filteredMovies={filteredMovies}
         isSavedPage={false}
         handleCardLike={handleCardLike}
       />
     );
-  } else {
-    content = <></>;
   }
 
   return (
@@ -47,7 +66,7 @@ export default function Movies({
       <Header isLoggedIn={true} />
       <main className="main">
         <SearchForm
-          movies={"movies"}
+          MoviesArr={"movies"}
           handleSubmitForm={handleSubmitForm}
           handleCheckboxStatus={handleCheckboxStatus}
         />

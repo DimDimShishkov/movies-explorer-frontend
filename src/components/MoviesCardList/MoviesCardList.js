@@ -7,7 +7,6 @@ import "./MoviesCardList.css";
 export default function MoviesCardList({
   movies,
   savedMovies,
-  filteredMovies,
   isSavedPage,
   handleCardLike,
 }) {
@@ -45,12 +44,10 @@ export default function MoviesCardList({
   useEffect(() => {
     if (movies) {
       setMoviesArr(movies.slice(0, moviesCount));
-    } else if (filteredMovies) {
-      setMoviesArr(filteredMovies.slice(0, moviesCount));
-    }
-  }, [moviesCount, filteredMovies, movies, isSavedPage]);
+    } 
+  }, [moviesCount, movies]);
 
-  if (filteredMovies?.length <= moviesCount) {
+  if (movies?.length <= moviesCount) {
     moreButton = <></>;
   } else {
     moreButton = (
