@@ -1,5 +1,5 @@
 ссылка на пуллреквест:
-https://github.com/DimDimShishkov/movies-explorer-frontend/pull/4
+https://github.com/DimDimShishkov/movies-explorer-frontend/pull/5
 
 ссылка на фронтенд-часть проекта:
 https://movies-explorer-ddsh.nomoredomains.icu/
