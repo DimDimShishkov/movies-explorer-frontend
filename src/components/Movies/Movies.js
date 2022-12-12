@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useEffect } from "react";
 import Preloader from "../Preloader/Preloader";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";

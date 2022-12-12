@@ -70,7 +70,7 @@ function App() {
           });
         }
       })
-      .catch(() => handleLoggedOut(true));
+      .catch((err) => handleLoggedOut(true));
   };
 
   // загрузка сохраненных фильмов с сервера
@@ -101,14 +101,8 @@ function App() {
       }
       setSavedMovieItems(JSON.parse(savedMovies));
     } else {
-      handleLoggedOut(true)
+      handleLoggedOut(true);
     }
-
-    /*     let movies = localStorage.getItem("movies");
-    if (!movies) {
-      handleUploadMovies();
-    }
-    setMovieItems(JSON.parse(movies)); */
   }, []);
 
   // функция выхода из аккаунта
@@ -126,7 +120,7 @@ function App() {
     localStorage.removeItem("savedMoviesFound");
     setCurrentUser({});
     setLoggedIn(false);
-    isPush ? console.log("Требуется повторная авторизация") : (history("/"));
+    isPush ? console.log("Требуется повторная авторизация") : history("/");
   }
 
   // функция редактирования аккаунта
@@ -174,20 +168,24 @@ function App() {
       setLongSavedMovieItems([]);
       setShortSavedMovieItems([]);
       arr.forEach((movie) => {
-        movie.duration <= ShortFilmLong ? shortFilms.push(movie) : longFilms.push(movie);
+        movie.duration <= ShortFilmLong
+          ? shortFilms.push(movie)
+          : longFilms.push(movie);
       });
       setLongSavedMovieItems(longFilms);
       setShortSavedMovieItems(shortFilms);
-      isShort ? setSavedMovieItems(shortFilms) : setSavedMovieItems(longFilms)
+      isShort ? setSavedMovieItems(shortFilms) : setSavedMovieItems(longFilms);
     } else {
       setLongMovieItems([]);
       setShortMovieItems([]);
       arr.forEach((movie) => {
-        movie.duration <= ShortFilmLong ? shortFilms.push(movie) : longFilms.push(movie);
+        movie.duration <= ShortFilmLong
+          ? shortFilms.push(movie)
+          : longFilms.push(movie);
       });
       setLongMovieItems(longFilms);
       setShortMovieItems(shortFilms);
-      isShort ? setMovieItems(shortFilms) : setMovieItems(longFilms)
+      isShort ? setMovieItems(shortFilms) : setMovieItems(longFilms);
     }
     localStorage.setItem(`${MoviesArr}Found`, JSON.stringify(arr));
   }
@@ -228,11 +226,11 @@ function App() {
   }
 
   // поиск по своим фильмам
-  function handleSavedMovieSearch(criterion, isShort) {
+/*   function handleSavedMovieSearch(criterion, isShort) {
     setMoviesErr(false);
     //  let SavedMoviesArr = localStorage.getItem("savedMovies");
     handleFilterMovies(savedMovieItems, criterion, isShort, true);
-  }
+  } */
 
   // установка лайка на карточку с фильмом
   function handleCardLike(movie, isLiked) {

@@ -14,10 +14,10 @@ export default function Profile({
   const [errorMessage, setErrorMessage] = useState("");
   const [validationMessage, setValidationMessage] = useState({});
   const [newValue, setNewValue] = useState({});
-  const [isDirty, setIsDirty] = useState(false)
+  const [isDirty, setIsDirty] = useState(false);
   let nameReg = /^[a-za-яё -]+$/i;
   let emailReg = /^([a-z0-9_.-]+)@([a-z0-9_.-]+)\.([a-z.]{2,6})$/;
-  const submitButtonState = (!validationMessage.name && !validationMessage.email)
+  const submitButtonState = !validationMessage.name && !validationMessage.email;
 
   useEffect(() => {
     setNewValue({
@@ -47,7 +47,7 @@ export default function Profile({
   }, [isDirty, isLoading]);
 
   const handleChange = (evt) => {
-    setIsDirty(true)
+    setIsDirty(true);
     const name = evt.target.name;
     const value = evt.target.value;
     setNewValue({ ...newValue, [name]: value });
