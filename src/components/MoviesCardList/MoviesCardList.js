@@ -1,5 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import {
+  DesktopInitialCards,
+  DesktopMoreCards,
+  DesktopWight,
+  MobileInitialCards,
+  MobileMoreCards,
+  MobileWight,
+  SmallInitialCards,
+  TabletInitialCards,
+  TabletMoreCards,
+  TabletWight,
+} from "../../utils/constants";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader/Preloader";
 import "./MoviesCardList.css";
@@ -15,6 +27,7 @@ export default function MoviesCardList({
   const [moviesCount, setMoviesCount] = useState(0);
   const [moviesArr, setMoviesArr] = useState([]);
   let moreButton;
+  let content;
   // слушатель на изменение ширины экрана
   useEffect(() => {
     handlePageWidth();
@@ -25,18 +38,18 @@ export default function MoviesCardList({
   // рассчёт количества загружаемых карточек с фильмами
   let handlePageWidth = () => {
     let resizePageWidth = document.documentElement.scrollWidth;
-    if (resizePageWidth >= 1280) {
-      setMoreMoviesCount(4);
-      return setMoviesCount(12);
-    } else if (resizePageWidth >= 990) {
-      setMoreMoviesCount(3);
-      return setMoviesCount(9);
-    } else if (resizePageWidth >= 768) {
-      setMoreMoviesCount(2);
-      return setMoviesCount(8);
+    if (resizePageWidth >= DesktopWight) {
+      setMoreMoviesCount(DesktopMoreCards);
+      return setMoviesCount(DesktopInitialCards);
+    } else if (resizePageWidth >= TabletWight) {
+      setMoreMoviesCount(TabletMoreCards);
+      return setMoviesCount(TabletInitialCards);
+    } else if (resizePageWidth >= MobileWight) {
+      setMoreMoviesCount(MobileMoreCards);
+      return setMoviesCount(MobileInitialCards);
     } else {
-      setMoreMoviesCount(2);
-      return setMoviesCount(5);
+      setMoreMoviesCount(MobileMoreCards);
+      return setMoviesCount(SmallInitialCards);
     }
   };
 
@@ -44,7 +57,7 @@ export default function MoviesCardList({
   useEffect(() => {
     if (movies) {
       setMoviesArr(movies.slice(0, moviesCount));
-    } 
+    }
   }, [moviesCount, movies]);
 
   if (movies?.length <= moviesCount) {
@@ -62,23 +75,27 @@ export default function MoviesCardList({
     let savedMovie = savedMovies?.filter((item) => {
       return item.movieId === movie.id && item.owner === currentUser.id;
     });
-    return savedMovie[0]?._id;
+    return savedMovie && savedMovie[0]?._id;
   };
+
+  if (movies?.length === 0) {
+    content = <p className="movies-card-list__text">Ничего не найдено</p>;
+  } else {
+    content = moviesArr?.map((item) => (
+      <MoviesCard
+        movie={item}
+        isLiked={IsLikedCheck(item)}
+        key={item.id ? item.id : item._id}
+        saved={isSavedPage}
+        handleCardLike={handleCardLike}
+      />
+    ));
+  }
 
   return (
     <>
       <section className="movies-card-list">
-        <div className="movies-card-list__section">
-          {moviesArr?.map((item) => (
-            <MoviesCard
-              movie={item}
-              isLiked={IsLikedCheck(item)}
-              key={item.id ? item.id : item._id}
-              saved={isSavedPage}
-              handleCardLike={handleCardLike}
-            />
-          ))}
-        </div>
+        <div className="movies-card-list__section">{content}</div>
       </section>
       {moreButton}
     </>

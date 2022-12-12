@@ -20,6 +20,7 @@ import {
 } from "../../utils/MainApi";
 import { ProtectedRoute } from "../../utils/ProtectedRoute";
 import { MoviesApi } from "../../utils/MoviesApi";
+import { ShortFilmLong } from "../../utils/constants";
 
 function App() {
   const [currentUser, setCurrentUser] = useState({});
@@ -33,8 +34,6 @@ function App() {
   const [longSavedMovieItems, setLongSavedMovieItems] = useState([]);
   const [shortSavedMovieItems, setShortSavedMovieItems] = useState([]);
   const [savedMovieItems, setSavedMovieItems] = useState([]);
-  const [moviesIsNotFound, setMoviesIsnotFound] = useState(false);
-  const [savedMoviesIsNotFound, setSavedMoviesIsnotFound] = useState(false);
   const history = useNavigate();
 
   // функция регистрации
@@ -71,7 +70,7 @@ function App() {
           });
         }
       })
-      .catch((err) => console.log(err));
+      .catch(() => handleLoggedOut(true));
   };
 
   // загрузка сохраненных фильмов с сервера
@@ -101,6 +100,8 @@ function App() {
         handleUploadSavedMovies();
       }
       setSavedMovieItems(JSON.parse(savedMovies));
+    } else {
+      handleLoggedOut(true)
     }
 
     /*     let movies = localStorage.getItem("movies");
@@ -111,7 +112,7 @@ function App() {
   }, []);
 
   // функция выхода из аккаунта
-  function handleLoggedOut() {
+  function handleLoggedOut(isPush = false) {
     setIsLoading(false);
     authCheckOut();
     localStorage.removeItem("jwt");
@@ -125,7 +126,7 @@ function App() {
     localStorage.removeItem("savedMoviesFound");
     setCurrentUser({});
     setLoggedIn(false);
-    history("/");
+    isPush ? console.log("Требуется повторная авторизация") : (history("/"));
   }
 
   // функция редактирования аккаунта
@@ -166,16 +167,6 @@ function App() {
         return false;
       }
     });
-    // если не найдено
-    if (arr.length === 0) {
-      MoviesArr === "movies"
-        ? setMoviesIsnotFound(true)
-        : setSavedMoviesIsnotFound(true);
-    } else {
-      MoviesArr === "movies"
-        ? setMoviesIsnotFound(false)
-        : setSavedMoviesIsnotFound(false);
-    }
     // разделение на длинные и короткие фильмы
     let shortFilms = [];
     let longFilms = [];
@@ -183,7 +174,7 @@ function App() {
       setLongSavedMovieItems([]);
       setShortSavedMovieItems([]);
       arr.forEach((movie) => {
-        movie.duration <= 40 ? shortFilms.push(movie) : longFilms.push(movie);
+        movie.duration <= ShortFilmLong ? shortFilms.push(movie) : longFilms.push(movie);
       });
       setLongSavedMovieItems(longFilms);
       setShortSavedMovieItems(shortFilms);
@@ -192,7 +183,7 @@ function App() {
       setLongMovieItems([]);
       setShortMovieItems([]);
       arr.forEach((movie) => {
-        movie.duration <= 40 ? shortFilms.push(movie) : longFilms.push(movie);
+        movie.duration <= ShortFilmLong ? shortFilms.push(movie) : longFilms.push(movie);
       });
       setLongMovieItems(longFilms);
       setShortMovieItems(shortFilms);
@@ -303,7 +294,6 @@ function App() {
                   handleSubmitForm={handleMovieSearch}
                   movies={movieItems}
                   savedMovies={savedMovieItems}
-                  moviesIsNotFound={moviesIsNotFound}
                   isLoading={isLoading}
                   moviesErr={moviesErr}
                   handleCardLike={handleCardLike}
@@ -320,7 +310,6 @@ function App() {
                   component={SavedMovies}
                   handleSubmitForm={handleMovieSearch}
                   movies={savedMovieItems}
-                  moviesIsNotFound={savedMoviesIsNotFound}
                   isLoading={isLoading}
                   moviesErr={moviesErr}
                   handleCardDislike={handleCardLike}

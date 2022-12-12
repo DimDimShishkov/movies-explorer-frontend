@@ -1,6 +1,8 @@
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 
 export const ProtectedRoute = ({component: Component, loggedIn, path, ...props }) => {
+  const location = useLocation()
+  console.log(location)
   return loggedIn ? <Component {...props} /> : <Navigate to="/" />;
 };

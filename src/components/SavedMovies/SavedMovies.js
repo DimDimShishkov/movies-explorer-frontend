@@ -9,7 +9,6 @@ export default function SavedMovies({
   handleCardDislike,
   handleSubmitForm,
   movies,
-  moviesIsNotFound,
   isLoading,
   moviesErr,
   handleCheckboxStatus,
@@ -20,19 +19,19 @@ export default function SavedMovies({
   useEffect(() => {
     if (!savedMoviesFound) {
       content = <></>;
+    } else if (savedMoviesFound) {
+      content = (
+        <MoviesCardList
+          movies={savedMoviesFound}
+          savedMovies={movies}
+          isSavedPage={true}
+          handleCardLike={handleCardDislike}
+        />
+      );
     }
   }, []);
 
-  if (savedMoviesFound) {
-    content = (
-      <MoviesCardList
-        movies={savedMoviesFound}
-        savedMovies={movies}
-        isSavedPage={true}
-        handleCardLike={handleCardDislike}
-      />
-    );
-  } else if (isLoading) {
+  if (isLoading) {
     content = <Preloader isLoading={true} />;
   } else if (moviesErr) {
     content = (
@@ -41,9 +40,7 @@ export default function SavedMovies({
         сервер недоступен. Подождите немного и попробуйте ещё раз
       </p>
     );
-  } else if (moviesIsNotFound) {
-    content = <p className="movies-card-list__text">Ничего не найдено</p>;
-  } else if (movies?.length > 0) {
+  } else  {
     content = (
       <MoviesCardList
         movies={movies}

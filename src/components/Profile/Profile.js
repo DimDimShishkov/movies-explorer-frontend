@@ -64,6 +64,12 @@ export default function Profile({
         [name]: "Неправильный формат почты.",
       });
     }
+    if (value === currentUser[name]) {
+      return setValidationMessage({
+        ...validationMessage,
+        [name]: "Изменения соответсвуют существующим данным.",
+      });
+    }
     setValidationMessage({
       ...validationMessage,
       [name]: evt.target.validationMessage,

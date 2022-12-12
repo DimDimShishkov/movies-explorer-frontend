@@ -9,7 +9,6 @@ export default function Movies({
   handleSubmitForm,
   movies,
   savedMovies,
-  moviesIsNotFound,
   isLoading,
   moviesErr,
   handleCardLike,
@@ -42,9 +41,7 @@ export default function Movies({
         сервер недоступен. Подождите немного и попробуйте ещё раз
       </p>
     );
-  } else if (moviesIsNotFound) {
-    content = <p className="movies-card-list__text">Ничего не найдено</p>;
-  } else if (movies?.length > 0) {
+  } else {
     content = (
       <MoviesCardList
         movies={movies}
