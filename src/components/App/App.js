@@ -78,14 +78,13 @@ function App() {
           else history(path || location.pathname);
         }
       })
-      .catch((err) => {
+      .catch(() => {
         if (
           location.pathname === "/signup" ||
           location.pathname === "/signin"
         )
           history(location.pathname);
         else history("/");
-        console.log(err)
         handleLoggedOut()});
   };
   // загрузка сохраненных фильмов с сервера
@@ -117,7 +116,7 @@ function App() {
   }, [loggedIn]);
 
   // функция выхода из аккаунта
-  function handleLoggedOut(isPush = false) {
+  function handleLoggedOut() {
     setIsLoading(false);
     authCheckOut();
     localStorage.removeItem("movies");
@@ -127,7 +126,6 @@ function App() {
     localStorage.removeItem("moviesFound");
     setCurrentUser({});
     setLoggedIn(false);
-    isPush ? console.log("Требуется повторная авторизация") : history("/");
   }
 
   // функция редактирования аккаунта
