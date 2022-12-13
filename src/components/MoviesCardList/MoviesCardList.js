@@ -27,7 +27,7 @@ export default function MoviesCardList({
   const [moviesCount, setMoviesCount] = useState(0);
   const [moviesArr, setMoviesArr] = useState([]);
   let moreButton;
-  let content;
+
   // слушатель на изменение ширины экрана
   useEffect(() => {
     handlePageWidth();
@@ -60,7 +60,7 @@ export default function MoviesCardList({
     }
   }, [moviesCount, movies]);
 
-  if (movies?.length <= moviesCount) {
+  if (movies && movies?.length <= moviesCount) {
     moreButton = <></>;
   } else {
     moreButton = (
@@ -78,24 +78,20 @@ export default function MoviesCardList({
     return savedMovie && savedMovie[0]?._id;
   };
 
-  if (movies?.length === 0) {
-    content = <p className="movies-card-list__text">Ничего не найдено</p>;
-  } else {
-    content = moviesArr?.map((item) => (
-      <MoviesCard
-        movie={item}
-        isLiked={IsLikedCheck(item)}
-        key={item.id ? item.id : item._id}
-        saved={isSavedPage}
-        handleCardLike={handleCardLike}
-      />
-    ));
-  }
-
   return (
     <>
       <section className="movies-card-list">
-        <div className="movies-card-list__section">{content}</div>
+        <div className="movies-card-list__section">
+          {moviesArr?.map((item) => (
+            <MoviesCard
+              movie={item}
+              isLiked={IsLikedCheck(item)}
+              key={item.id ? item.id : item._id}
+              saved={isSavedPage}
+              handleCardLike={handleCardLike}
+            />
+          ))}
+        </div>
       </section>
       {moreButton}
     </>

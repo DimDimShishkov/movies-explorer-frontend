@@ -1,51 +1,35 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Preloader from "../Preloader/Preloader";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
+import { MovieErrorText, NoMovies } from "../../utils/constants";
 
 export default function Movies({
   handleSubmitForm,
   movies,
-  savedMovies,
+  moviesIsNotFound,
   isLoading,
   moviesErr,
   handleCardLike,
   handleCheckboxStatus,
 }) {
   let content;
-  let moviesFound = JSON.parse(localStorage.getItem("moviesFound"));
-
-  useEffect(() => {
-    if (!moviesFound) {
-      content = <></>;
-    } else {
-      content = (
-        <MoviesCardList
-          movies={moviesFound}
-          savedMovies={savedMovies}
-          isSavedPage={false}
-          handleCardLike={handleCardLike}
-        />
-      );
-    }
-  }, []);
+  let savedMovies = JSON.parse(localStorage.getItem("savedMovies"));
 
   if (isLoading) {
     content = <Preloader isLoading={true} />;
   } else if (moviesErr) {
-    content = (
-      <p className="movies-card-list__text">
-        Во время запроса произошла ошибка. Возможно, проблема с соединением или
-        сервер недоступен. Подождите немного и попробуйте ещё раз
-      </p>
-    );
+    content = <p className="movies-card-list__text">{MovieErrorText}</p>;
+  } else if (moviesIsNotFound) {
+    content = <p className="movies-card-list__text">{NoMovies}</p>;
   } else {
     content = (
       <MoviesCardList
         movies={movies}
         savedMovies={savedMovies}
+        moviesErr={moviesErr}
         isSavedPage={false}
         handleCardLike={handleCardLike}
       />
@@ -58,6 +42,7 @@ export default function Movies({
       <main className="main">
         <SearchForm
           MoviesArr={"movies"}
+          isLoading={isLoading}
           handleSubmitForm={handleSubmitForm}
           handleCheckboxStatus={handleCheckboxStatus}
         />

@@ -1,5 +1,5 @@
-const BASE_URL = "https://api.movies-explorer-ddsh.nomoredomains.icu";
-// const BASE_URL = "http://localhost";
+// const BASE_URL = "https://api.movies-explorer-ddsh.nomoredomains.icu";
+const BASE_URL = "http://localhost";
 
 const handleReturn = (res) => {
   if (res.ok) {
@@ -39,14 +39,13 @@ export const authCheckIn = (user) => {
   }).then((res) => handleReturn(res));
 };
 // получение токена и данных профиля через get /users/me
-export const authTokenCheck = (jwt) => {
+export const authTokenCheck = () => {
   return fetch(`${BASE_URL}/users/me`, {
     method: "GET",
     credentials: "include",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
-      Authorization: `${jwt}`,
     },
   }).then((res) => handleReturn(res));
 };
@@ -84,7 +83,7 @@ export const handleEditUserInfo = (user) => {
 export const handleDownloadMovies = () => {
   return fetch(`${BASE_URL}/movies`, {
     method: "GET",
-    credentials: 'include',
+    credentials: "include",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -96,7 +95,7 @@ export const handleDownloadMovies = () => {
 export const handleLikeMovie = (item) => {
   return fetch(`${BASE_URL}/movies`, {
     method: "POST",
-    credentials: 'include',
+    credentials: "include",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
@@ -121,7 +120,7 @@ export const handleLikeMovie = (item) => {
 export const handleDislikeMovie = (movieId) => {
   return fetch(`${BASE_URL}/movies/${movieId}`, {
     method: "DELETE",
-    credentials: 'include',
+    credentials: "include",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

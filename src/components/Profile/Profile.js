@@ -8,6 +8,7 @@ export default function Profile({
   isLoading,
   errorType,
   handleLoggedOut,
+  isUserChanged
 }) {
   const currentUser = useContext(CurrentUserContext);
   const [buttonText, setButtonText] = useState("Сохранить");
@@ -25,7 +26,7 @@ export default function Profile({
       email: currentUser.email,
       name: currentUser.name,
     });
-  }, [currentUser.email, currentUser.id, currentUser.name]);
+  }, [currentUser]);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
@@ -39,12 +40,12 @@ export default function Profile({
   useEffect(() => {
     if (isLoading) {
       return setButtonText("Загрузка...");
-    } else if (isDirty) {
+    } else if (isUserChanged) {
       return setButtonText("Сохранено");
     } else {
       return setButtonText("Сохранить");
     }
-  }, [isDirty, isLoading]);
+  }, [isUserChanged, isLoading]);
 
   const handleChange = (evt) => {
     setIsDirty(true);
@@ -86,9 +87,9 @@ export default function Profile({
         <button
           type="submit"
           className={`profile__submit-button ${
-            !submitButtonState && "profile__submit-button_disabled"
+            (!submitButtonState || isLoading) && "profile__submit-button_disabled"
           } `}
-          disabled={!submitButtonState}
+          disabled={!submitButtonState || isLoading}
         >
           {buttonText}
         </button>
@@ -144,6 +145,7 @@ export default function Profile({
                     minLength="2"
                     maxLength="30"
                     onChange={handleChange}
+                    disabled={isLoading}
                   />
                   {validationMessage?.name && (
                     <span className="profile__input-error">
@@ -162,6 +164,8 @@ export default function Profile({
                     name="email"
                     value={newValue.email ?? currentUser.email}
                     onChange={handleChange}
+                    disabled={isLoading}
+
                   />
                   {validationMessage?.email && (
                     <span className="profile__input-error">

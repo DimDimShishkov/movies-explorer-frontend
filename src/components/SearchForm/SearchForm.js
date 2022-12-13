@@ -4,24 +4,30 @@ import "./SearchForm.css";
 
 export default function SearchForm({
   MoviesArr,
+  isLoading,
   handleSubmitForm,
   handleCheckboxStatus,
 }) {
   const [isShortFilm, setIsShortFilm] = useState(false);
   const [validationMessage, setValidationMessage] = useState("");
   const [newValue, setNewValue] = useState("");
-
   // получение изначального состояния чекбокса и инпута
   useEffect(() => {
-    setIsShortFilm(JSON.parse(localStorage.getItem(`${MoviesArr}Checkbox`)));
-    setNewValue(JSON.parse(localStorage.getItem(`${MoviesArr}Search`)));
+    if (MoviesArr !== "savedMovies") {
+      setIsShortFilm(JSON.parse(localStorage.getItem(`${MoviesArr}Checkbox`)));
+      setNewValue(JSON.parse(localStorage.getItem(`${MoviesArr}Search`)));
+    }
   }, [MoviesArr]);
 
   // смена чекбокса
   function handleCheckboxChange() {
-    handleCheckboxStatus(!isShortFilm, (MoviesArr === "savedMovies"));
+    handleCheckboxStatus(!isShortFilm, MoviesArr === "savedMovies");
     setIsShortFilm(!isShortFilm);
-    localStorage.setItem(`${MoviesArr}Checkbox`, JSON.stringify(!isShortFilm));
+    MoviesArr !== "savedMovies" &&
+      localStorage.setItem(
+        `${MoviesArr}Checkbox`,
+        JSON.stringify(!isShortFilm)
+      );
   }
 
   // управление инпутом
@@ -29,7 +35,8 @@ export default function SearchForm({
     const value = evt.target.value;
     setNewValue(value);
     setValidationMessage(evt.target.validationMessage);
-    localStorage.setItem(`${MoviesArr}Search`, JSON.stringify(value));
+    MoviesArr !== "savedMovies" &&
+      localStorage.setItem(`${MoviesArr}Search`, JSON.stringify(value));
   };
 
   // отправка формы
@@ -58,6 +65,7 @@ export default function SearchForm({
               name="movie"
               value={newValue || ""}
               onChange={handleChange}
+              disabled={isLoading}
             />
             {validationMessage && (
               <span className="search-form__input-error">
@@ -68,9 +76,9 @@ export default function SearchForm({
           <button
             type="submit"
             className={`search-form__button ${
-              validationMessage && "search-form__button_disabled"
+              (validationMessage || isLoading) && "search-form__button_disabled"
             }`}
-            disabled={validationMessage}
+            disabled={validationMessage || isLoading}
           >
             Найти
           </button>

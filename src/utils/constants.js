@@ -14,3 +14,8 @@ export const MobileMoreCards = 2;
 export const SmallInitialCards = 5;
 // длительность короткометражек
 export const ShortFilmLong = 40;
+// ошибка при поиске фильмов
+export const MovieErrorText =
+  "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз";
+// нулевой результат поиска
+export const NoMovies = "Ничего не найдено";

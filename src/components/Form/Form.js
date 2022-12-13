@@ -7,7 +7,7 @@ export default function Form({
   isLoading,
   errorType,
   formType,
-  submitButtonText
+  submitButtonText,
 }) {
   const [buttonText, setButtonText] = useState(submitButtonText);
   const [errorMessage, setErrorMessage] = useState("");
@@ -26,7 +26,7 @@ export default function Form({
     } else {
       setButtonText(submitButtonText);
     }
-  }, [isLoading]);
+  }, [isLoading, submitButtonText]);
 
   useEffect(() => {
     if (errorType === 409) {
@@ -68,6 +68,7 @@ export default function Form({
           placeholder="Введите имя профиля"
           id="name"
           type="text"
+          disabled={isLoading}
         />
         {errors.name && (
           <span className="form__input-error">{errors.name.message}</span>
@@ -103,6 +104,7 @@ export default function Form({
             placeholder="Введите e-mail"
             id="email"
             type="email"
+            disabled={isLoading}
           />
           {errors.email && (
             <span className="form__input-error">{errors.email.message}</span>
@@ -120,6 +122,7 @@ export default function Form({
             placeholder="Введите пароль"
             id="password"
             type="password"
+            disabled={isLoading}
           />
           {errors.password && (
             <span className="form__input-error">{errors.password.message}</span>
@@ -133,9 +136,9 @@ export default function Form({
         <button
           type="submit"
           className={`form__submit-button ${
-            !isValid && "form__submit-button_disabled"
+            (!isValid || isLoading )&& "form__submit-button_disabled"
           } `}
-          disabled={!isValid}
+          disabled={!isValid || isLoading}
         >
           {buttonText}
         </button>

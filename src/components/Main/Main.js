@@ -8,6 +8,7 @@ import Promo from "../Promo/Promo";
 import Techs from "../Techs/Techs";
 
 export default function Main({loggedIn}) {
+  
   return (
     <>
       <Header isStartPage={true} isLoggedIn={loggedIn}/>
