@@ -53,25 +53,29 @@ function App() {
     authCheckIn(user)
       .then(() => {
         setLoggedIn(true);
-        authorization();
+        authorization("/movies");
         handleUploadSavedMovies();
-        history("/movies");
       })
       .catch((err) => setErrorType(err))
       .finally(() => setIsLoading(false));
   }
   // загрузка данных профиля с сервера
-  const authorization = async () => {
+  const authorization = async (path) => {
     authTokenCheck()
       .then((res) => {
         if (res) {
-          history(location.pathname)
           setLoggedIn(true);
           setCurrentUser({
             id: res._id,
             email: res.email,
             name: res.name,
           });
+          if (
+            location.pathname === "/signup" ||
+            location.pathname === "/signin"
+          )
+            history("/");
+          else history(path || location.pathname);
         }
       })
       .catch(() => handleLoggedOut(true));
