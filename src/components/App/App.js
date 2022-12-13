@@ -78,7 +78,15 @@ function App() {
           else history(path || location.pathname);
         }
       })
-      .catch(() => handleLoggedOut(true));
+      .catch((err) => {
+        if (
+          location.pathname === "/signup" ||
+          location.pathname === "/signin"
+        )
+          history(location.pathname);
+        else history("/");
+        console.log(err)
+        handleLoggedOut()});
   };
   // загрузка сохраненных фильмов с сервера
   function handleUploadSavedMovies() {
