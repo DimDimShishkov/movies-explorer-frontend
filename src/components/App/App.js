@@ -106,17 +106,6 @@ function App() {
   // хук заполнения данных профиля и фильмов после авторизации
   useEffect(() => {
     authorization();
-    /*     setMoviesErr(false);
-    setSavedMoviesIsNotFound(false);
-    let savedMovies = localStorage.getItem("savedMovies");
-    if (!savedMovies) {
-      handleUploadSavedMovies();
-    } else {
-      setSavedMovieItems(JSON.parse(savedMovies));
-    }
-    let moviesFound = JSON.parse(localStorage.getItem("moviesFound"));
-    let moviesCheckbox = JSON.parse(localStorage.getItem("moviesCheckbox"));
-    moviesFound && handleFilterShortMovies(false, moviesFound, moviesCheckbox); */
   }, [loggedIn]);
 
   // хук проверки данных
@@ -125,6 +114,7 @@ function App() {
       authCheck();
       setMoviesErr(false);
       setSavedMoviesIsNotFound(false);
+      setIsUserChanged(false);
       let savedMovies = localStorage.getItem("savedMovies");
       if (!savedMovies) {
         handleUploadSavedMovies();
@@ -197,9 +187,8 @@ function App() {
       setLongSavedMovieItems([]);
       setShortSavedMovieItems([]);
       arr?.forEach((movie) => {
-        movie.duration <= ShortFilmLong
-          ? shortFilms.push(movie)
-          : longFilms.push(movie);
+        movie.duration <= ShortFilmLong && shortFilms.push(movie);
+        longFilms.push(movie);
       });
       setLongSavedMovieItems(longFilms);
       setShortSavedMovieItems(shortFilms);
@@ -218,9 +207,8 @@ function App() {
       setLongMovieItems([]);
       setShortMovieItems([]);
       arr?.forEach((movie) => {
-        movie.duration <= ShortFilmLong
-          ? shortFilms.push(movie)
-          : longFilms.push(movie);
+        movie.duration <= ShortFilmLong && shortFilms.push(movie);
+        longFilms.push(movie);
       });
       setLongMovieItems(longFilms);
       setShortMovieItems(shortFilms);

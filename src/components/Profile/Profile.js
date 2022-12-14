@@ -41,10 +41,11 @@ export default function Profile({
   useEffect(() => {
     if (isLoading) {
       return setButtonText("Загрузка...");
-    } else if (isUserChanged) {
-      setIsFormSubmit(true);
-      return setButtonText("Сохранить");
     } else {
+      if (isUserChanged) {
+        setIsDirty(false);
+        setIsFormSubmit(true);
+      }
       return setButtonText("Сохранить");
     }
   }, [isUserChanged, isLoading]);
@@ -87,9 +88,6 @@ export default function Profile({
         {errorMessage && (
           <span className="profile__submit-error">{errorMessage}</span>
         )}
-        {isFormSubmit && (
-          <span className="profile__span">Данные отправлены</span>
-        )}
         <button
           type="submit"
           className={`profile__submit-button ${
@@ -105,7 +103,9 @@ export default function Profile({
   } else {
     submitButtonContent = (
       <div className="profile__submit-container">
-        <span className="profile__span">Редактировать</span>
+        <span className="profile__span">
+          {isUserChanged ? "Данные отправлены" : "Редактировать"}
+        </span>
         <span onClick={() => handleLoggedOut()} className="profile__link">
           Выйти из аккаунта
         </span>
