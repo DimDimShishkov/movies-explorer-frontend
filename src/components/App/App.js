@@ -53,14 +53,15 @@ function App() {
     authCheckIn(user)
       .then(() => {
         setLoggedIn(true);
-        authorization("/movies");
+        authorization();
+        history("/movies")
         handleUploadSavedMovies();
       })
       .catch((err) => setErrorType(err))
       .finally(() => setIsLoading(false));
   }
   // загрузка данных профиля с сервера
-  const authorization = async (path) => {
+  const authorization = async () => {
     authTokenCheck()
       .then((res) => {
         if (res) {
@@ -75,7 +76,7 @@ function App() {
             location.pathname === "/signin"
           )
             history("/");
-          else history(path || location.pathname);
+          else history(location.pathname);
         }
       })
       .catch(() => {

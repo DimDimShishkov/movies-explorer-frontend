@@ -8,11 +8,12 @@ export default function Profile({
   isLoading,
   errorType,
   handleLoggedOut,
-  isUserChanged
+  isUserChanged,
 }) {
   const currentUser = useContext(CurrentUserContext);
   const [buttonText, setButtonText] = useState("Сохранить");
   const [errorMessage, setErrorMessage] = useState("");
+  const [isFormSubmit, setIsFormSubmit] = useState(false);
   const [validationMessage, setValidationMessage] = useState({});
   const [newValue, setNewValue] = useState({});
   const [isDirty, setIsDirty] = useState(false);
@@ -41,7 +42,8 @@ export default function Profile({
     if (isLoading) {
       return setButtonText("Загрузка...");
     } else if (isUserChanged) {
-      return setButtonText("Сохранено");
+      setIsFormSubmit(true);
+      return setButtonText("Сохранить");
     } else {
       return setButtonText("Сохранить");
     }
@@ -49,6 +51,7 @@ export default function Profile({
 
   const handleChange = (evt) => {
     setIsDirty(true);
+    setIsFormSubmit(false);
     const name = evt.target.name;
     const value = evt.target.value;
     setNewValue({ ...newValue, [name]: value });
@@ -84,12 +87,16 @@ export default function Profile({
         {errorMessage && (
           <span className="profile__submit-error">{errorMessage}</span>
         )}
+        {isFormSubmit && (
+          <span className="profile__span">Данные отправлены</span>
+        )}
         <button
           type="submit"
           className={`profile__submit-button ${
-            (!submitButtonState || isLoading) && "profile__submit-button_disabled"
+            (!submitButtonState || isLoading || isFormSubmit) &&
+            "profile__submit-button_disabled"
           } `}
-          disabled={!submitButtonState || isLoading}
+          disabled={!submitButtonState || isLoading || isFormSubmit}
         >
           {buttonText}
         </button>
@@ -111,7 +118,7 @@ export default function Profile({
     if (errorType === 409) {
       setErrorMessage("Пользователь с таким email уже существует");
     } else if (errorType === 401) {
-      setErrorMessage("Неправильные почта или пароль");
+      setErrorMessage("Неправильные почта или имя");
     } else if (errorType) {
       setErrorMessage("На сервере произошла ошибка");
     } else {
@@ -165,7 +172,6 @@ export default function Profile({
                     value={newValue.email ?? currentUser.email}
                     onChange={handleChange}
                     disabled={isLoading}
-
                   />
                   {validationMessage?.email && (
                     <span className="profile__input-error">

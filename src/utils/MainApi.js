@@ -1,5 +1,5 @@
-const BASE_URL = "https://api.movies-explorer-ddsh.nomoredomains.icu";
-// const BASE_URL = "http://localhost";
+// const BASE_URL = "https://api.movies-explorer-ddsh.nomoredomains.icu";
+const BASE_URL = "http://localhost";
 
 const handleReturn = (res) => {
   if (res.ok) {
