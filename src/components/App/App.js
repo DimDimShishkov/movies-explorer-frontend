@@ -54,7 +54,7 @@ function App() {
       .then(() => {
         setLoggedIn(true);
         authorization();
-        history("/movies")
+        history("/movies");
         handleUploadSavedMovies();
       })
       .catch((err) => setErrorType(err))
@@ -80,14 +80,17 @@ function App() {
         }
       })
       .catch(() => {
-        if (
-          location.pathname === "/signup" ||
-          location.pathname === "/signin"
-        )
+        if (location.pathname === "/signup" || location.pathname === "/signin")
           history(location.pathname);
         else history("/");
-        handleLoggedOut()});
+        handleLoggedOut();
+      });
   };
+  // проверка токена
+  const authCheck = async () => {
+    authTokenCheck().catch(() => handleLoggedOut());
+  };
+
   // загрузка сохраненных фильмов с сервера
   function handleUploadSavedMovies() {
     setIsLoading(true);
@@ -103,7 +106,7 @@ function App() {
   // хук заполнения данных профиля и фильмов после авторизации
   useEffect(() => {
     authorization();
-    setMoviesErr(false);
+    /*     setMoviesErr(false);
     setSavedMoviesIsNotFound(false);
     let savedMovies = localStorage.getItem("savedMovies");
     if (!savedMovies) {
@@ -113,8 +116,27 @@ function App() {
     }
     let moviesFound = JSON.parse(localStorage.getItem("moviesFound"));
     let moviesCheckbox = JSON.parse(localStorage.getItem("moviesCheckbox"));
-    moviesFound && handleFilterShortMovies(false, moviesFound, moviesCheckbox);
+    moviesFound && handleFilterShortMovies(false, moviesFound, moviesCheckbox); */
   }, [loggedIn]);
+
+  // хук проверки данных
+  useEffect(() => {
+    if (loggedIn) {
+      authCheck();
+      setMoviesErr(false);
+      setSavedMoviesIsNotFound(false);
+      let savedMovies = localStorage.getItem("savedMovies");
+      if (!savedMovies) {
+        handleUploadSavedMovies();
+      } else {
+        setSavedMovieItems(JSON.parse(savedMovies));
+      }
+      let moviesFound = JSON.parse(localStorage.getItem("moviesFound"));
+      let moviesCheckbox = JSON.parse(localStorage.getItem("moviesCheckbox"));
+      moviesFound &&
+        handleFilterShortMovies(false, moviesFound, moviesCheckbox);
+    }
+  }, [location]);
 
   // функция выхода из аккаунта
   function handleLoggedOut() {
