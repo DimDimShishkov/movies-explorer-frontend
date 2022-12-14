@@ -112,6 +112,7 @@ function App() {
   useEffect(() => {
     if (loggedIn) {
       authCheck();
+      setErrorType("")
       setMoviesErr(false);
       setSavedMoviesIsNotFound(false);
       setIsUserChanged(false);
