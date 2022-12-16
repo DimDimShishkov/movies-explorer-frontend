@@ -15,6 +15,7 @@ export default function Register({ handleSubmitForm, isLoading, errorType }) {
             isLoading={isLoading}
             errorType={errorType}
             formType={"register"}
+            submitButtonText={"Зарегистрироваться"}
           />
           <div className="register__container">
             <h2 className="register__subtitle">Уже зарегистрированы?</h2>

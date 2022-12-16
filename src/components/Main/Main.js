@@ -7,10 +7,11 @@ import Portfolio from "../Portfolio/Portfolio";
 import Promo from "../Promo/Promo";
 import Techs from "../Techs/Techs";
 
-export default function Main() {
+export default function Main({loggedIn}) {
+  
   return (
     <>
-      <Header isStartPage={true} />
+      <Header isStartPage={true} isLoggedIn={loggedIn}/>
       <main className="main">
         <Promo />
         <AboutProject />

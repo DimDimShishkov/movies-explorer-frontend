@@ -1,18 +1,49 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import React, { useEffect, useState } from "react";
 import FilterCheckbox from "../FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
 
-export default function SearchForm() {
-  const [isShortFilms, setShortFilms] = useState(false);
+export default function SearchForm({
+  MoviesArr,
+  isLoading,
+  handleSubmitForm,
+  handleCheckboxStatus,
+}) {
+  const [isShortFilm, setIsShortFilm] = useState(false);
+  const [validationMessage, setValidationMessage] = useState("");
+  const [newValue, setNewValue] = useState("");
+  // получение изначального состояния чекбокса и инпута
+  useEffect(() => {
+    if (MoviesArr !== "savedMovies") {
+      setIsShortFilm(JSON.parse(localStorage.getItem(`${MoviesArr}Checkbox`)));
+      setNewValue(JSON.parse(localStorage.getItem(`${MoviesArr}Search`)));
+    }
+  }, [MoviesArr]);
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm({ mode: "onChange" });
+  // смена чекбокса
+  function handleCheckboxChange() {
+    handleCheckboxStatus(!isShortFilm, MoviesArr === "savedMovies");
+    setIsShortFilm(!isShortFilm);
+    MoviesArr !== "savedMovies" &&
+      localStorage.setItem(
+        `${MoviesArr}Checkbox`,
+        JSON.stringify(!isShortFilm)
+      );
+  }
 
-  const onSubmit = (data) => console.log(data);
+  // управление инпутом
+  const handleChange = (evt) => {
+    const value = evt.target.value;
+    setNewValue(value);
+    setValidationMessage(evt.target.validationMessage);
+    MoviesArr !== "savedMovies" &&
+      localStorage.setItem(`${MoviesArr}Search`, JSON.stringify(value));
+  };
+
+  // отправка формы
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+    handleSubmitForm(MoviesArr, newValue, isShortFilm);
+  };
 
   return (
     <section className="search-form">
@@ -21,31 +52,41 @@ export default function SearchForm() {
           className="search-form__form"
           autoComplete="off"
           noValidate
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit}
         >
           <fieldset className="search-form__fieldset">
             <input
-              {...register("movie", {
-                required: "Поле обязательно к заполнению.",
-              })}
               className={`search-form__input ${
-                errors.movie ? "search-form__input_type_error" : ""
+                validationMessage ? "search-form__input_type_error" : ""
               }`}
-              placeholder="Фильм"
-              id="movie"
+              required
               type="text"
+              placeholder="Введите название фильма"
+              name="movie"
+              value={newValue || ""}
+              onChange={handleChange}
+              disabled={isLoading}
             />
-            {errors.movie && (
+            {validationMessage && (
               <span className="search-form__input-error">
-                {errors.movie.message}
+                {validationMessage}
               </span>
             )}
           </fieldset>
-          <button type="submit" className="search-form__button">
+          <button
+            type="submit"
+            className={`search-form__button ${
+              (validationMessage || isLoading) && "search-form__button_disabled"
+            }`}
+            disabled={validationMessage || isLoading}
+          >
             Найти
           </button>
         </form>
-        <FilterCheckbox checkboxCodition={setShortFilms} />
+        <FilterCheckbox
+          isChecked={isShortFilm}
+          handleCheckboxStatus={handleCheckboxChange}
+        />
         <span className="search-form__line" />
       </div>
     </section>

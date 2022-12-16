@@ -4,6 +4,7 @@
   line-height: 12px;
   color: #ee3465;
   position: absolute;
-  bottom: -10px;
+  bottom: 2px;
+  right: 10px;
   z-index: 2;
 }

@@ -9,7 +9,7 @@ export default function Footer() {
       </p>
       <div className="footer__line" />
       <div className="footer__content">
-        <p className="footer__item">© 2020</p>
+        <p className="footer__item">© 2022</p>
         <div className="footer__links">
           <a href="https://practicum.yandex.ru/" className="footer__link">
             Яндекс.Практикум

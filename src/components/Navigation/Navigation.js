@@ -44,9 +44,9 @@ export default function Navigation({
         </div>
 
         <div className="navigation__account navigation_desktop">
-          <a href="profile" className="navigation__account-link">
+          <NavLink to="/profile" className="navigation__account-link">
             Аккаунт
-          </a>
+          </NavLink>
           <div className="navigation__account-body">
             <img
               className="navigation__account-logo"
@@ -106,7 +106,7 @@ export default function Navigation({
         </div>
       </>
     );
-  } else if (isStartPage) {
+  } else if (isStartPage && !isLoggedIn) {
     content = (
       <div className="navigation">
         <a href="/signup" className="navigation__register">

@@ -1,43 +1,50 @@
-import React, { useEffect, useState } from "react";
-import { MoviesApi } from "../../utils/MoviesApi";
+import React from "react";
 import Header from "../Header/Header";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import SearchForm from "../SearchForm/SearchForm";
 import Footer from "../Footer/Footer";
+import Preloader from "../Preloader/Preloader";
+import { MovieErrorText, NoMovies } from "../../utils/constants";
 
-export default function SavedMovies() {
-  const [movieItems, setMovieItems] = useState([]);
+export default function SavedMovies({
+  handleCardDislike,
+  handleSubmitForm,
+  movies,
+  savedMoviesIsNotFound,
+  isLoading,
+  moviesErr,
+  handleCheckboxStatus,
+}) {
+  let content;
 
-  const [lastI, setLastI] = useState(0);
-  let arr = movieItems;
-
-  // костыль для проверки верстки
-  function biba() {
-    return MoviesApi.handleUploadMovies()
-      .then((res) => {
-        let i = lastI;
-        while (i < lastI + 3) {
-          arr.push(res[i]);
-          i++;
-          setLastI(i);
-        }
-        setMovieItems(arr);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+  if (isLoading) {
+    content = <Preloader isLoading={true} />;
+  } else if (moviesErr) {
+    content = <p className="movies-card-list__text">{MovieErrorText}</p>;
+  } else if (savedMoviesIsNotFound) {
+    content = <p className="movies-card-list__text">{NoMovies}</p>;
+  } else {
+    content = (
+      <MoviesCardList
+        movies={movies}
+        savedMovies={movies}
+        isSavedPage={true}
+        handleCardLike={handleCardDislike}
+      />
+    );
   }
-
-  useEffect(() => {
-    biba();
-  }, []);
 
   return (
     <>
       <Header isLoggedIn={true} />
       <main className="main">
-        <SearchForm />
-        <MoviesCardList movies={movieItems} saved={false} />
+        <SearchForm
+          MoviesArr={"savedMovies"}
+          isLoading={isLoading}
+          handleSubmitForm={handleSubmitForm}
+          handleCheckboxStatus={handleCheckboxStatus}
+        />
+        {content}
       </main>
       <Footer />
     </>

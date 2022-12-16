@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import "./MoviesCard.css";
 
-export default function MoviesCard({ movie, saved }) {
-  const [isLiked, setIsLiked] = useState(false);
+export default function MoviesCard({ movie, saved, isLiked, handleCardLike }) {
+  let imageSource;
+  let contentButton;
 
   const durationHandle = () => {
     let hours = ~~(movie.duration / 60);
@@ -11,31 +12,45 @@ export default function MoviesCard({ movie, saved }) {
     return hours > 0 ? `${hours}ч${minsRes}` : `${mins}м`;
   };
 
-  let contentButton;
-  if (saved) {
+  if (!saved) {
+    imageSource = (
+      <a href={movie.trailerLink} target="_blank" rel="noreferrer">
+        <img
+          src={`https://api.nomoreparties.co${movie.image.url}`}
+          alt={movie.nameRU}
+          className="movies-card__image"
+        />
+      </a>
+    );
     contentButton = (
       <button
         className={`movies-card__like ${
           isLiked ? "movies-card__like_active" : ""
         }`}
-        onClick={() => setIsLiked(!isLiked)}
+        onClick={() => handleCardLike(movie, isLiked)}
       />
     );
   } else {
+    imageSource = (
+      <a href={movie.trailerLink} target="_blank" rel="noreferrer">
+        <img
+          src={movie.image}
+          alt={movie.nameRU}
+          className="movies-card__image"
+        />
+      </a>
+    );
     contentButton = (
       <button
         className="movies-card__delete"
+        onClick={() => handleCardLike(movie, saved)}
       />
     );
   }
 
   return (
     <div className="movies-card">
-      <img
-        src={`https://api.nomoreparties.co${movie.image.url}`}
-        alt={movie.nameRU}
-        className="movies-card__image"
-      />
+      {imageSource}
 
       <div className="movies-card__container">
         <div className="movies-card__items">

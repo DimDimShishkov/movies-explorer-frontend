@@ -15,8 +15,7 @@ export default function Portfolio() {
               rel="noreferrer"
             >
               <p className="portfolio__subheading">
-                {/* Групповой проект "Любимовка" */}
-                Статичный сайт
+                Групповой проект "Любимовка"
               </p>
               <p className="portfolio__arrow">↗</p>
             </a>
@@ -30,8 +29,7 @@ export default function Portfolio() {
               rel="noreferrer"
             >
               <p className="portfolio__subheading">
-                {/* Проект "Хинкальная" на Redux" */}
-                Адаптивный сайт
+                Проект "Хинкальная" на Redux"
               </p>
               <p className="portfolio__arrow">↗</p>
             </a>
@@ -46,8 +44,7 @@ export default function Portfolio() {
               rel="noreferrer"
             >
               <p className="portfolio__subheading">
-                {/* Проект "Mesto" на React с авторизацией и регистрацией" */}
-                Одностраничное приложение
+                Проект "Mesto" на React с авторизацией и регистрацией"
               </p>
               <p className="portfolio__arrow">↗</p>
             </a>
